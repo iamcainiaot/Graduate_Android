@@ -1,10 +1,11 @@
-package  com.example.zt.graduate.main.fragment;
+package com.example.zt.graduate.main.fragment;
 
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.administrator.graduate_android.R;
 
+import lib_utils.ToastUtil;
 import mvp.fragment.BaseMvpFragment;
 
 /**
@@ -25,11 +26,6 @@ public class HeartWallFragment extends BaseMvpFragment implements View.OnClickLi
     }
 
     @Override
-    public void onClick(View v) {
-        // do nothing
-    }
-
-    @Override
     public int layoutId() {
         return R.layout.fragment_heart_wall;
     }
@@ -41,11 +37,18 @@ public class HeartWallFragment extends BaseMvpFragment implements View.OnClickLi
 
     @Override
     public void initView() {
-        // do nothing
+        $(R.id.dsad).setOnClickListener((View v) -> {
+            ToastUtil.showShort(getContext(), "ssssssssss");
+        });
     }
 
     @Override
     public void initEvent() {
         // do nothing
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

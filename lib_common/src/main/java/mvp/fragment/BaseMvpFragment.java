@@ -53,9 +53,9 @@ public abstract class BaseMvpFragment extends BaseFragment {
         mRootView = LayoutInflater.from(mActivity).inflate(layoutId(), container, false);
         initView();
         initEvent();
-        if (!setMotionEventSplittingEnabled() && mRootView instanceof ViewGroup) {
-            // CommonUtils.setMotionEventSplittingEnabled((ViewGroup) mRootView, false);//设置不可以多点点击
-        }
+        // if (!setMotionEventSplittingEnabled() && mRootView instanceof ViewGroup) {
+        //     // CommonUtils.setMotionEventSplittingEnabled((ViewGroup) mRootView, false);//设置不可以多点点击
+        // }
         return mRootView;
     }
 

@@ -5,6 +5,9 @@
     <!-- 系统状态栏背景色，这里用深色系，防止系统状态栏电池，时间等信息看不到 -->
     <color name="color_app_status_bar">#1b1b1b</color>
 
+    <!-- 统一紫色配置 -->
+    <color name="common_purple">#DA70D6</color>
+
     <color name="color_1_level_app_color">#01AFFD</color>
     <color name="color_1_level_main_body">#838EA0</color>
 

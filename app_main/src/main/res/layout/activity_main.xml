@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_background_new"
     android:clipChildren="false"
     android:clipToPadding="false">
 
@@ -12,7 +11,14 @@
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_function" />
+        android:layout_above="@+id/test_tc" />
+
+    <TextView
+        android:id="@+id/test_tc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_function"
+        android:text="@string/searching" />
 
     <RelativeLayout
         android:id="@+id/bottom_function"
@@ -119,19 +125,6 @@
                     android:textColor="@color/text_color_blue_grey_select"
                     android:textSize="@dimen/font_20" />
             </RelativeLayout>
-
         </LinearLayout>
-
     </RelativeLayout>
-
-    <View
-        android:id="@+id/masking"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dimen_133"
-        android:layout_alignBottom="@id/bottom_function"
-        android:background="@color/color_background_masking"
-        android:clickable="true"
-        android:visibility="gone"
-        tools:visibility="gone" />
-
 </RelativeLayout>

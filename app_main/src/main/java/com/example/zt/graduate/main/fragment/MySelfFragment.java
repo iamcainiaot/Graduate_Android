@@ -1,10 +1,13 @@
-package  com.example.zt.graduate.main.fragment;
+package com.example.zt.graduate.main.fragment;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.administrator.graduate_android.R;
 
+import lib_utils.MyLogUtil;
 import mvp.fragment.BaseMvpFragment;
 
 /**
@@ -20,16 +23,17 @@ public class MySelfFragment extends BaseMvpFragment implements View.OnClickListe
         Bundle args = new Bundle();
         MySelfFragment mySelfFragment = new MySelfFragment();
         mySelfFragment.setArguments(args);
-        return mySelfFragment;
+        return new MySelfFragment();
     }
 
     @Override
     public void onClick(View v) {
-        // do nothing
+
     }
 
     @Override
     public int layoutId() {
+        MyLogUtil.d("--------到了我自己的页面来了");
         return R.layout.fragment_myself;
     }
 

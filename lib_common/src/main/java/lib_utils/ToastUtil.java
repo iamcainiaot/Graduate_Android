@@ -26,7 +26,6 @@ public class ToastUtil {
         try {
             if (null == toast) {
                 toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
             } else {
                 toast.setText(message);
             }
@@ -46,7 +45,6 @@ public class ToastUtil {
         try {
             if (null == toast) {
                 toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
             } else {
                 toast.setText(message);
             }

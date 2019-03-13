@@ -1,5 +1,7 @@
 package com.example.zt.graduate.main;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,12 +11,13 @@ import com.example.zt.graduate.main.fragment.HeartWallFragment;
 import com.example.zt.graduate.main.fragment.MySelfFragment;
 import com.example.zt.graduate.main.fragment.SearchingFragment;
 
+import lib_utils.ToastUtil;
 import mvp.BaseMvpActivity;
 
 /**
  * @author taozhu5
  * @date 2019/3/13 11:49
- * @description 描述
+ * @description 主页
  */
 public class MainActivity extends BaseMvpActivity {
 
@@ -57,6 +60,10 @@ public class MainActivity extends BaseMvpActivity {
      * 我的
      */
     private View ctMySelf;
+    /**
+     * 当前正在显示的Fragment
+     */
+    private Fragment mCurrentShowFragment;
 
     @Override
     public int layoutId() {
@@ -65,7 +72,7 @@ public class MainActivity extends BaseMvpActivity {
 
     @Override
     public void initData() {
-
+        // do nothing
     }
 
     @Override
@@ -73,6 +80,7 @@ public class MainActivity extends BaseMvpActivity {
         ctHeartWall = $(R.id.ct_heart_wall);
         ctMySelf = $(R.id.ct_myself);
         ctSearching = $(R.id.ct_searching);
+
         ctSearching.setOnClickListener((View v) -> {
             showFragment(FragmentType.SEARCHING);
         });
@@ -85,7 +93,13 @@ public class MainActivity extends BaseMvpActivity {
         showFragment(FragmentType.SEARCHING);
     }
 
+    /**
+     * @author taozhu5
+     * @date 2019/3/13 12:27
+     * @description 显示fragment
+     */
     public void showFragment(FragmentType fragmentType) {
+        Fragment showFragment;
         TextView tvHeartWall = $(R.id.tv_heart_wall);
         ImageView ivHeartWall = $(R.id.iv_heart_wall);
         TextView tvSearching = $(R.id.tv_searching);
@@ -94,8 +108,9 @@ public class MainActivity extends BaseMvpActivity {
         ImageView ivMyself = $(R.id.iv_myself);
         if (fragmentType == FragmentType.HEART_WALL) {
             if (mHeartWallFragment == null) {
-                mHeartWallFragment = HeartWallFragment.getInstance();
+                mHeartWallFragment = new HeartWallFragment();
             }
+            showFragment = mHeartWallFragment;
             tvHeartWall.setSelected(true);
             ivHeartWall.setSelected(true);
             tvSearching.setSelected(false);
@@ -104,8 +119,9 @@ public class MainActivity extends BaseMvpActivity {
             ivMyself.setSelected(false);
         } else if (fragmentType == FragmentType.SEARCHING) {
             if (mSearchingFragment == null) {
-                mSearchingFragment = SearchingFragment.getInstance();
+                mSearchingFragment = new SearchingFragment();
             }
+            showFragment = mSearchingFragment;
             tvHeartWall.setSelected(false);
             ivHeartWall.setSelected(false);
             tvSearching.setSelected(true);
@@ -114,8 +130,9 @@ public class MainActivity extends BaseMvpActivity {
             ivMyself.setSelected(false);
         } else {
             if (mMySelfFragment == null) {
-                mMySelfFragment = MySelfFragment.getInstance();
+                mMySelfFragment = new MySelfFragment();
             }
+            showFragment = mMySelfFragment;
             tvHeartWall.setSelected(false);
             ivHeartWall.setSelected(false);
             tvSearching.setSelected(false);
@@ -124,5 +141,22 @@ public class MainActivity extends BaseMvpActivity {
             ivMyself.setSelected(true);
         }
 
+        //说明是同样的
+        if (mCurrentShowFragment == showFragment) {
+            return;
+        }
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //  说明是第一次添加
+        if (!showFragment.isAdded()) {
+            transaction.add(R.id.fragment_container, showFragment);
+            if (mCurrentShowFragment != null) {
+                transaction.hide(mCurrentShowFragment);
+            }
+        } else {
+            transaction.hide(mCurrentShowFragment).show(showFragment);
+        }
+        transaction.commitAllowingStateLoss();
+        mCurrentShowFragment = showFragment;
     }
 }
