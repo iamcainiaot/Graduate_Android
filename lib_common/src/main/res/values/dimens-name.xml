@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="header_height">@dimen/dimen_80</dimen>
+    <dimen name="header_height_2">@dimen/dimen_90</dimen>
+    <dimen name="header_right_textsize">@dimen/font_32</dimen>
+
+    <!-- begin 较大文字定义 -->
+    <dimen name="font_big_1">@dimen/font_80</dimen> <!-- 分数对比及少量重要信息展示 -->
+    <dimen name="font_big_2">@dimen/font_60</dimen> <!-- 分数对比及少量重要信息展示 -->
+    <dimen name="font_big_3">@dimen/font_48</dimen> <!-- 分数对比及少量重要信息展示 -->
+    <dimen name="font_big_4">@dimen/font_40</dimen> <!-- 少量重要信息展示 -->
+    <!-- end 较大文字定义 -->
+
+    <!-- begin 一般大小文字定义 -->
+    <dimen name="font_normal_1">@dimen/font_36</dimen> <!-- 页面顶部bar条标题 -->
+    <dimen name="font_normal_2">@dimen/font_32</dimen> <!-- 列表标题，按钮文字 -->
+    <dimen name="font_normal_3">@dimen/font_30</dimen> <!-- 用于二级切换等 -->
+    <dimen name="font_normal_4">@dimen/font_28</dimen> <!-- 用于正文，副标题，按钮文字等 -->
+    <!-- end 一般大小文字定义 -->
+
+    <!-- begin 较小文字定义 -->
+    <dimen name="font_small_1">@dimen/font_24</dimen> <!-- 用于辅助性文字，提示性文字，备注等 -->
+    <dimen name="font_small_2">@dimen/font_20</dimen> <!-- 标签文字及主页底部按钮操作文字 -->
+    <!-- end 较小文字定义 -->
+
+</resources>

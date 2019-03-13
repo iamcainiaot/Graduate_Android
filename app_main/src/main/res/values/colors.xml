@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorStatusBar">#f0f6fb</color>
+
+    <!-- 系统状态栏背景色，这里用深色系，防止系统状态栏电池，时间等信息看不到 -->
+    <color name="color_app_status_bar">#1b1b1b</color>
+
+    <color name="color_1_level_app_color">#01AFFD</color>
+    <color name="color_1_level_main_body">#838EA0</color>
+
+    <color name="assignhomework_press">#0f1b1b1b</color>
+    <color name="assignhomework_normal">#ffffffff</color>
+
+    <color name="one_button_award_header">#ffffff</color>
+    <color name="webview_header_color">#000000</color>
+    <color name="stu_submit_detail_header">#ffffff</color>
+    <color name="teacher_ban_words_vertical_line">#FFE3EDF3</color>
+    <color name="homepage_header">#ffffff</color>
+
+    <color name="color_white">#ffffff</color>
+
+    <color name="mine_vertical_line_color">#E2EDEC</color> <!--我的页面竖直线颜色值-->
+    <color name="color_font_clock_gray">#7D8385</color>
+    <color name="color_font_clock_notification_hint">#A1ABAE</color>
+
+</resources>

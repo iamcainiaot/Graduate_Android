@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <attr name="borderRadius" format="dimension" />
+    <attr name="borderColor" format="color" />
+    <attr name="type">
+        <enum name="circle" value="0" />
+        <enum name="round" value="1" />
+    </attr>
+    <attr name="contentViewId" format="reference" />
+
+    <declare-styleable name="MyImageView">
+        <attr name="borderRadius" />
+        <attr name="borderWidth" />
+        <attr name="borderColor" />
+        <attr name="type" />
+    </declare-styleable>
+
+    <declare-styleable name="ArcProgressBar">
+        <attr name="arcBorderWidth" format="dimension" />
+        <attr name="arcUnProgressColor" format="color" />
+        <attr name="arcProgressColor" format="color" />
+        <attr name="arcRadius" format="dimension" />
+        <attr name="arcDegree" format="integer" />
+        <attr name="arcStartAngleBase" format="integer" />
+        <attr name="arcCapRound" format="boolean" />
+    </declare-styleable>
+
+    <!-- 同步练习作答问题的正确率横向进度条参数 -->
+
+    <declare-styleable name="HorizontalProgressBar">
+        <attr name="horizontalProgressColor" format="color" />
+        <attr name="horizontalUnProgressColor" format="color" />
+        <attr name="horizontalProgressWidth" format="dimension" />
+        <attr name="horizontalProgressHeight" format="dimension" />
+        <attr name="horizontalBorderWidth" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="CirclePageIndicator" tools:ignore="ResourceName">
+        <attr name="circle_radius" format="dimension" />
+        <attr name="rect_width" format="dimension" />
+        <attr name="circle_interval" format="dimension" />
+        <attr name="circle_color" format="color" />
+        <attr name="circle_selected_color" format="color" />
+        <attr name="page_count" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="XTabLayout">
+        <attr name="x_tabIndicatorColor" format="color" />
+        <attr name="x_tabIndicatorHeight" format="dimension" />
+        <attr name="x_tabIndicatorWidth" format="dimension" />
+        <attr name="x_tabIndicatorCorner" format="dimension" />
+        <attr name="x_tabIndicatorDrawable" format="reference" />
+        <attr name="x_tabContentStart" format="dimension" />
+        <attr name="x_tabBackground" format="reference" />
+        <attr name="x_tabMode">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+        </attr>
+        <attr name="x_tabGravity">
+            <enum name="fill" value="0" />
+            <enum name="center" value="1" />
+        </attr>
+        <attr name="x_tabMinWidth" format="dimension" />
+        <attr name="x_tabMaxWidth" format="dimension" />
+        <attr name="x_tabTextAppearance" format="reference" />
+        <attr name="x_tabTextColor" format="color" />
+        <attr name="x_tabSelectedTextColor" format="color" />
+        <attr name="x_tabPaddingStart" format="dimension" />
+        <attr name="x_tabPaddingTop" format="dimension" />
+        <attr name="x_tabPaddingEnd" format="dimension" />
+        <attr name="x_tabPaddingBottom" format="dimension" />
+        <attr name="x_tabPadding" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="XTabItem">
+        <attr name="android:text" />
+        <attr name="android:icon" />
+        <attr name="android:layout" />
+    </declare-styleable>
+
+    <declare-styleable name="MathPreviewView">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="answerTextColor" format="color" />
+        <attr name="answerTextErrorColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FractionBlankPreviewView">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="f_answerTextColor" format="color" />
+        <attr name="f_answerTextErrorColor" format="color" />
+        <attr name="middleLineMargin" format="dimension" />
+        <attr name="middleLineHeight" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="EmptyView">
+        <attr name="backgroundColor" format="color" />
+        <attr name="imageResourceId" format="integer" />
+        <attr name="textResourceId" format="string" />
+        <attr name="isShowBtn" format="boolean" />
+        <attr name="contentViewId" />
+    </declare-styleable>
+
+    <declare-styleable name="InternalLoadingWidget">
+        <attr name="android:textSize" />
+        <attr name="android:textColor" />
+        <attr name="android:text" />
+        <attr name="errorImage" format="reference" />
+        <attr name="defaultState">
+            <enum name="loading" value="0" />
+            <enum name="error" value="1" />
+        </attr>
+        <attr name="contentViewId" /> <!-- 加载完成后要显示的View的id -->
+    </declare-styleable>
+
+
+    <!--            头部信息栏 eg：左图片 中文字 右图片             -->
+    <attr name="centerTitle" format="string|reference" /> <!-- 中间标题 -->
+    <attr name="rightText" format="string|reference" /> <!-- 右边标题 -->
+    <attr name="leftText" format="string|reference" /> <!-- 左边标题 -->
+
+    <declare-styleable name="CenterTextHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="CenterTextRightTextHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+        <attr name="rightText" /> <!-- 右边标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="LeftIconHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+        <attr name="bgColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="LeftIconRightIconHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="LeftIconRightTextHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+        <attr name="rightText" /> <!-- 右边标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="LeftTextHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+        <attr name="leftText" /> <!-- 左边标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="LeftTextRightTextHeader">
+        <attr name="centerTitle" /> <!-- 中间标题 -->
+        <attr name="leftText" /> <!-- 左边标题 -->
+        <attr name="rightText" /> <!-- 右边标题 -->
+    </declare-styleable>
+
+    <declare-styleable name="LeftTextRightIconHeader">
+        <attr name="leftText" /> <!-- 左边标题 -->
+        <attr name="leftTextSize" format="dimension" />
+    </declare-styleable>
+
+</resources>

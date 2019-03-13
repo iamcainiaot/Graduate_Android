@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <!--  ToolBar颜色  -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <!--  状态栏颜色  -->
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 页面背景色 -->
+        <item name="android:windowBackground">@color/color_background_new_2</item>
+    </style>
+
+</resources>

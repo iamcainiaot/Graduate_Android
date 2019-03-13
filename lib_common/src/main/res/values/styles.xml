@@ -1,0 +1,103 @@
+<resources>
+
+    <!-- 应用统一风格配置 文字类 -->
+    <style name="head_title_text">
+        <item name="android:textSize">@dimen/dimen_36</item>
+        <item name="android:textColor">@color/head_title_text_color</item>
+    </style>
+
+    <style name="title_text">
+        <item name="android:textSize">@dimen/dimen_32</item>
+        <item name="android:textColor">@color/title_text_color</item>
+    </style>
+
+    <style name="content_text">
+        <item name="android:textSize">@dimen/dimen_28</item>
+        <item name="android:textColor">@color/content_text_color</item>
+    </style>
+
+    <style name="hint_text">
+        <item name="android:textSize">@dimen/dimen_28</item>
+        <item name="android:textColor">@color/hint_text_color</item>
+    </style>
+
+    <style name="edit_text">
+        <item name="android:textSize">@dimen/dimen_28</item>
+        <item name="android:textColor">@color/edit_text_color</item>
+    </style>
+
+    <style name="menu_text">
+        <item name="android:textSize">@dimen/dimen_36</item>
+        <item name="android:textColor">#ffffff</item>
+    </style>
+
+    <!-- 应用统一风格配置 弹窗类 -->
+    <!-- 有暗色背景的Dialog -->
+    <style name="LoadingDialog" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="AlertDialogStyle">
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 设置自定义布局的背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 设置window背景透明，也就是去边框 -->
+        <item name="android:windowFrame">@null</item>
+        <item name="android:background">#00000000</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- 应用统一风格配置 页面类 -->
+
+
+    <declare-styleable name="CornerLinearLayout">
+        <attr name="cornerRadius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Indicator">
+        <!-- Count of indicators. -->
+        <attr name="count" format="integer" />
+        <!-- Current position. -->
+        <attr name="position" format="integer" />
+        <!-- Space between indicators -->
+        <attr name="space" format="dimension" />
+        <!-- Color indicator -->
+        <attr name="onColor" format="reference|color" />
+        <attr name="offColor" format="reference|color" />
+        <!-- drawable indicator -->
+        <attr name="on" format="reference" />
+        <attr name="off" format="reference" />
+    </declare-styleable>
+
+
+    <style name="transparentFrameWindowStyle">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <!-- 底部弹出选择窗的动画样式 -->
+    <style name="bottom_dialog_style">
+        <item name="android:windowEnterAnimation">@anim/dialog_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out_anim</item>
+    </style>
+
+    <!-- 一般的横向的分割线样式 -->
+    <style name="HorizontalNormalDividerLineStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dimen_1</item>
+        <item name="android:background">@color/color_line</item>
+    </style>
+
+</resources>

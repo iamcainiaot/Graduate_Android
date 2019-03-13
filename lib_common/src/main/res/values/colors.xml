@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#292a33</color>
+    <color name="statusBarColor">#292a33</color>
+    <color name="colorPrimaryDark">#292a33</color>
+    <color name="colorPrimaryLight">#41ee60</color>
+    <color name="color_app_status_bar">#1b1b1b</color> <!-- 系统状态栏背景色 -->
+    <color name="colorAccent">#08a1ef</color>
+    <color name="colorBackground">#f6f9fb</color>
+    <color name="secondary_text">#727272</color>
+    <!-- 应用统一风格配置 -->
+    <color name="head_title_text_color">#333333</color><!-- 顶部主标题文字颜色 -->
+    <color name="title_text_color">#333333</color><!-- 页面标题文字颜色 -->
+    <color name="content_text_color">#666666</color><!-- 页面内容文字颜色 -->
+    <color name="hint_text_color">#999999</color><!-- 页面提醒文字颜色 -->
+    <color name="edit_text_color">#333333</color><!-- 页面输入处文字颜色 -->
+    <color name="common_blue">#00baff</color><!-- 统一蓝色配置 -->
+    <color name="common_purple">#DA70D6</color><!-- 统一紫色配置 -->
+    <color name="color_grey">#0f1b1b1b</color>
+
+    <color name="white">#ffffff</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="color_red_btn_normal">#FF5E61</color>
+    <color name="color_yellow_btn_normal">#FFE346</color>
+    <color name="color_yellow_btn_disable">#FFFFFF</color>
+    <color name="color_yellow_btn_text">#8C4417</color>
+    <color name="color_yellow_btn_disable_text">#C1CCD1</color>
+
+    <!-- begin 背景色定义 -->
+    <color name="color_background_normal">#F0F6FB</color><!-- 一般的背景色 -->
+    <color name="color_background_new">#f6fafc</color><!-- 浅色背景色（v1.7ui新改版色系） -->
+    <color name="color_background_new_2">#F2F6F9</color><!-- 浅色背景色（v1.8ui新改版色系） -->
+    <color name="color_background_masking">#c4111212</color><!-- 一般的蒙层背景色 -->
+    <color name="color_background_gray">#FBFDFF</color><!-- 灰色背景色 -->
+    <color name="color_background_emphasize">#F6FAFF</color><!-- 一般强调的背景色 -->
+    <!-- end 背景色定义 -->
+
+    <!-- begin 字体颜色定义 -->
+    <color name="color_font_normal">#838EA0</color><!-- 一般的字体颜色 -->
+    <color name="color_font_gray">#C1CCD1</color><!-- 一般灰色表示不可用的字体颜色 -->
+    <color name="color_font_gray_2">#858989</color><!-- 一般灰色字体颜色 -->
+    <color name="color_font_emphasize">#1B1B1B</color><!-- 强调的字体颜色 -->
+    <color name="color_font_emphasize_2">#222222</color><!-- 强调的字体颜色2 -->
+    <color name="color_font_emphasize_3">#1E1E1E</color><!-- 强调的字体颜色3 -->
+    <color name="color_font_emphasize_4">#4B4C4D</color><!-- 强调的字体颜色4 -->
+    <color name="color_font_blue_mark">#01AFFD</color><!-- 蓝色标记的字体颜色 -->
+    <color name="color_font_blue_normal">#00BAFF</color><!-- 蓝色的字体颜色 -->
+    <color name="color_font_correct">#00CC56</color><!-- 标识正确的字体颜色 -->
+    <color name="color_font_wrong">#FF5E61</color><!-- 标识错误的字体颜色 -->
+    <color name="color_font_striking">#FF5E61</color><!-- 引人注目的的字体颜色 -->
+    <color name="color_font_main_grey">#7D8385</color>  <!--主页灰色系1-->
+    <color name="color_font_main_grey_2">#A1ABAE</color>  <!--主页灰色系2-->
+    <color name="color_font_striking_2">#FF5663</color>  <!--引人注目的的字体颜色2-->
+    <color name="color_font_main_tab_unselected">#A1ABAE</color><!-- 首页底部tab未选中时的字体颜色 -->
+    <!-- end 字体颜色定义 -->
+
+    <!-- begin 重要颜色定义 -->
+    <color name="color_strong_app_main">#00baff</color><!-- 产品主色调，大面积使用，特别强调的按钮和突出的文字，icon -->
+    <color name="color_strong_app_assistant">#8edcff</color><!-- 小面积使用，用于辅助品牌色 -->
+    <color name="color_strong_app_assistant_2">#dcf4ff</color><!-- 小面积使用，用于辅助品牌色，顶部提示性入口背景 -->
+    <color name="color_strong_app_emphasize">#fdc111</color><!-- 辅助性颜色，用于需要强调的信息，按钮，字段 -->
+    <color name="color_strong_app_wrong_or_warning">#ff5e61</color><!-- 错误提示颜色，警示色，禁止色，强调色 -->
+    <color name="color_strong_app_correct">#00cc56</color><!-- 正确提示颜色 -->
+    <!-- end 重要颜色定义 -->
+
+    <!-- begin 一般颜色定义 -->
+    <color name="color_normal_main">#1b1b1b</color><!-- 页面标题，正文，重要级文字信息 -->
+    <color name="color_normal_part">#707a8a</color><!-- 部分图标色彩 -->
+    <color name="color_normal_assistant">#838ea0</color><!-- 辅助性文字颜色 -->
+    <!-- end 一般颜色定义 -->
+
+    <!-- begin 较弱颜色定义 -->
+    <color name="color_weak_hint">#c1ccd1</color><!-- 不可点击字段，输入框文字提示颜色 -->
+    <color name="color_weak_stroke_edge">#e3edf3</color><!-- 描边颜色，少量部分应用 -->
+    <color name="color_weak_page_background">#f0f6fb</color><!-- 页面底部颜色 -->
+    <color name="color_weak_less_color_or_table_header">#f6faff</color><!-- 少用颜色,表格头部等 -->
+    <color name="color_weak_page_background_2">#f8fbff</color><!-- 与背景展开的底部颜色 -->
+    <!-- end 较弱颜色定义 -->
+
+    <color name="color_line">#e3edf3</color><!-- 一般分割线的颜色 -->
+
+</resources>

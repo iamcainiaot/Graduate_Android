@@ -1,0 +1,9 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.lib_common">
+    <!--网络权限-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--是否有网络权限-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+</manifest>
+
