@@ -6,6 +6,8 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
+        // greendao自动生成代码插件
+        classpath 'org.greenrobot:greendao-gradle-plugin:3.2.0'
     }
 }
 

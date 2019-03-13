@@ -2,11 +2,14 @@ package com.example.zt.graduate.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.example.administrator.graduate_android.R;
 import com.example.zt.graduate.login.iview.ILoginView;
 import com.example.zt.graduate.login.model.response.LoginResponse;
+import com.example.zt.graduate.login.presenter.LoginPresenter;
 
+import lib_utils.MyLogUtil;
 import mvp.BaseMvpActivity;
 
 /**
@@ -15,14 +18,6 @@ import mvp.BaseMvpActivity;
  * @description 登陆
  */
 public class LoginActivity extends BaseMvpActivity implements ILoginView {
-    /**
-     * 启动此页面
-     */
-    public static void start(Context context) {
-        Intent intent = new Intent(context, LoginActivity.class);
-        context.startActivity(intent);
-    }
-
     @Override
     public int layoutId() {
         return R.layout.activity_login;
@@ -35,16 +30,26 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
 
     @Override
     public void initView() {
-        //View header = $(R.id.);
+        LoginPresenter mLoginPresenter;
+        View tvLogin = $(R.id.tv_login);
+        tvLogin.setOnClickListener((View v) -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+        mLoginPresenter = new LoginPresenter(this, this);
+        mLoginPresenter.doLogin("18700000000", "18700000000");
+
     }
 
     @Override
     public void onLoginStart() {
-        // do nothing
+        MyLogUtil.d("开始登陆");
     }
 
     @Override
     public void onLoginReturned(LoginResponse loginResponse) {
-        // do nothing
+        MyLogUtil.d("登陆成功返回数据：" + loginResponse.toString());
+        MyLogUtil.d(loginResponse.toString());
     }
 }
