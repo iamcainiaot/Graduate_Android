@@ -1,7 +1,9 @@
-package  com.example.zt.graduate.main.fragment;
+package com.example.zt.graduate.main.fragment;
 
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.administrator.graduate_android.R;
 
 import mvp.fragment.BaseMvpFragment;
 
@@ -29,7 +31,7 @@ public class SearchingFragment extends BaseMvpFragment implements View.OnClickLi
 
     @Override
     public int layoutId() {
-        return 0;
+        return R.layout.fragment_searching;
     }
 
     @Override

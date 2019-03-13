@@ -3,6 +3,8 @@ package  com.example.zt.graduate.main.fragment;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.administrator.graduate_android.R;
+
 import mvp.fragment.BaseMvpFragment;
 
 /**
@@ -28,7 +30,7 @@ public class MySelfFragment extends BaseMvpFragment implements View.OnClickListe
 
     @Override
     public int layoutId() {
-        return 0;
+        return R.layout.fragment_myself;
     }
 
     @Override
