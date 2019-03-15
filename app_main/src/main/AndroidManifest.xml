@@ -3,12 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.administrator.graduate_android">
 
-    <!--网络权限-->
+    <!-- 网络权限 -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--是否有网络权限-->
+    <!-- 是否有网络权限 -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <!--自动启动-->
+    <!-- 自动启动 -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name="com.example.zt.graduate.app.UserApplication"
         android:allowBackup="false"
@@ -17,12 +18,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:label,android:allowBackup,android:supportsRtl">
-
         <activity
-            android:name="com.example.zt.graduate.main.MainActivity"
+            android:name="com.example.zt.graduate.SplashActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.ExpandToStatusBar">
+            android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,8 +32,12 @@
         <activity
             android:name="com.example.zt.graduate.login.LoginActivity"
             android:configChanges="orientation|screenSize|keyboardHidden"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.example.zt.graduate.main.MainActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="portrait" />
+        <activity android:name="com.example.zt.graduate.choose_label.ChooseLabelActivity"></activity>
     </application>
-
 
 </manifest>

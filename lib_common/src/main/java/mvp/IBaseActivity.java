@@ -14,7 +14,7 @@ public interface IBaseActivity {
     int layoutId();
 
     /**
-     *初始化数据，一般是上个页面传递过来的Intent数据
+     * 初始化数据，一般是上个页面传递过来的Intent数据
      */
     void initData();
 
@@ -27,4 +27,9 @@ public interface IBaseActivity {
      * 初始化Event，可以是
      */
     void initEvent();
+
+    /**
+     * 设置沉浸式状态栏
+     */
+    void setStatus();
 }

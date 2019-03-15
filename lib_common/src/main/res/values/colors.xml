@@ -17,6 +17,7 @@
     <color name="common_blue">#00baff</color><!-- 统一蓝色配置 -->
     <!-- 统一紫色配置 -->
     <color name="common_purple">#DA70D6</color>
+    <color name="dan_purple">#FFBBFF</color>
     <!-- 统一紫色配置 -->
     <color name="color_grey">#0f1b1b1b</color>
 

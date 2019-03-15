@@ -1,5 +1,7 @@
 package com.example.zt.graduate.main;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -20,6 +22,16 @@ import mvp.BaseMvpActivity;
  * @description 主页
  */
 public class MainActivity extends BaseMvpActivity {
+
+    /**
+     * 启动此页面
+     *
+     * @param context 上下文
+     */
+    public static void start(Context context) {
+        Intent intent = new Intent(context, MainActivity.class);
+        context.startActivity(intent);
+    }
 
     private enum FragmentType {
         /**

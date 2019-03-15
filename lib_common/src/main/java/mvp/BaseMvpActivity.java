@@ -1,9 +1,15 @@
 package mvp;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.IdRes;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowInsets;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -47,6 +53,41 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
         initData();
         initView();
         initEvent();
+        setStatus();
+    }
+
+    /**
+     * 子类如果 要将内容延伸到状态栏的话就重写此方法，并调用setStatusMVP()方法
+     */
+    @Override
+    public void setStatus() {
+
+    }
+
+    /**
+     * 设置内容延伸到状态栏去，子类如果需要，就复写此方法
+     */
+    public void setStatusMVP() {
+        // 设置内容延伸到状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            View decorView = window.getDecorView();
+            decorView.setOnApplyWindowInsetsListener(new View.OnApplyWindowInsetsListener() {
+                @TargetApi(Build.VERSION_CODES.KITKAT_WATCH)
+                @Override
+                public WindowInsets onApplyWindowInsets(View v, WindowInsets insets) {
+                    WindowInsets defaultInsets = v.onApplyWindowInsets(insets);
+                    return defaultInsets.replaceSystemWindowInsets(
+                            defaultInsets.getSystemWindowInsetLeft(),
+                            0,
+                            defaultInsets.getSystemWindowInsetRight(),
+                            defaultInsets.getSystemWindowInsetBottom());
+                }
+            });
+            ViewCompat.requestApplyInsets(decorView);
+            //将状态栏设成透明，如不想透明可设置其他颜色
+            window.setStatusBarColor(ContextCompat.getColor(this, android.R.color.transparent));
+        }
     }
 
     @Override

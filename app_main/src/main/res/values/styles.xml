@@ -11,8 +11,21 @@
     <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light.NoActionBar" />
 
     <style name="AppTheme" parent="AppBaseTheme">
-        <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowBackground">@color/color_background_new_2</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowShowWallpaper">false</item>
     </style>
+    <!--自定义style的parent必须是Theme.AppCompat.XXX，并且要NoActionBar，这样能隐藏闪屏页界面的标题栏-->
+    <style name="splashTheme" parent="Theme.AppCompat.NoActionBar">
+        // 设置展示的图片
+        <item name="android:windowBackground">@color/dan_purple</item>
+        //windowBackground设置为闪屏页要显示的图片。
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
 </resources>

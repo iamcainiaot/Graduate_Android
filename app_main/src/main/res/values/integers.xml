@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="clock_template_homework_span_count">3</integer> <!-- 标签个数 -->
+</resources>
