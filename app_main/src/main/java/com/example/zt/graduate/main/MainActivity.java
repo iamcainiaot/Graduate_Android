@@ -13,7 +13,6 @@ import com.example.zt.graduate.main.fragment.HeartWallFragment;
 import com.example.zt.graduate.main.fragment.MySelfFragment;
 import com.example.zt.graduate.main.fragment.SearchingFragment;
 
-import lib_utils.ToastUtil;
 import mvp.BaseMvpActivity;
 
 /**

@@ -1,9 +1,5 @@
 package mvp;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
 /**
  * @author taozhu5
  * @date 2019/3/13 10:16

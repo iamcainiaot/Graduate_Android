@@ -1,7 +1,5 @@
 package com.example.zt.graduate.login.model.response;
 
-import java.util.List;
-
 /**
  * @author taozhu5
  * @date 2019/3/13 09:53

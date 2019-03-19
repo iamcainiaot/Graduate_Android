@@ -10,14 +10,12 @@ import com.example.zt.graduate.choose_label.ChooseLabelActivity;
 import com.example.zt.graduate.login.iview.ILoginView;
 import com.example.zt.graduate.login.model.response.LoginResponse;
 import com.example.zt.graduate.login.presenter.LoginPresenter;
-import com.example.zt.graduate.main.MainActivity;
 
 import java.util.List;
 
 import lib_utils.MyLogUtil;
 import lib_utils.db.greendaogen.DaoSession;
 import mvp.BaseMvpActivity;
-import mvp.BaseResponse;
 
 /**
  * @author taozhu5

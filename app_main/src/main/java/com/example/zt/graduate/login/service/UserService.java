@@ -4,13 +4,9 @@ package com.example.zt.graduate.login.service;
 import com.example.zt.graduate.login.model.response.LoginResponse;
 
 import java.util.List;
-import java.util.Map;
 
 import mvp.BaseResponse;
-import retrofit2.http.FieldMap;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 import retrofit2.http.Streaming;
 import rx.Observable;
 

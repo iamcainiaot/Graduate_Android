@@ -9,11 +9,9 @@ import com.example.zt.graduate.manager.HttpManager;
 
 import java.util.List;
 
-import lib_utils.net.RxSubscribe;
-
 import lib_utils.MyLogUtil;
+import lib_utils.net.RxSubscribe;
 import mvp.BasePresenter;
-import mvp.BaseResponse;
 
 /**
  * @author taozhu5
