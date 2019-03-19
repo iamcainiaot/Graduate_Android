@@ -1,17 +1,10 @@
 package com.example.zt.graduate;
 
-import android.content.Intent;
 import android.os.Handler;
-import android.view.View;
 
 import com.example.administrator.graduate_android.R;
 import com.example.zt.graduate.login.LoginActivity;
-import com.example.zt.graduate.login.iview.ILoginView;
-import com.example.zt.graduate.login.model.response.LoginResponse;
-import com.example.zt.graduate.login.presenter.LoginPresenter;
-import com.example.zt.graduate.main.MainActivity;
 
-import lib_utils.MyLogUtil;
 import mvp.BaseMvpActivity;
 
 /**

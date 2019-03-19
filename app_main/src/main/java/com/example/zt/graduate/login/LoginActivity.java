@@ -12,9 +12,12 @@ import com.example.zt.graduate.login.model.response.LoginResponse;
 import com.example.zt.graduate.login.presenter.LoginPresenter;
 import com.example.zt.graduate.main.MainActivity;
 
+import java.util.List;
+
 import lib_utils.MyLogUtil;
 import lib_utils.db.greendaogen.DaoSession;
 import mvp.BaseMvpActivity;
+import mvp.BaseResponse;
 
 /**
  * @author taozhu5
@@ -64,13 +67,12 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
         LoginPresenter mLoginPresenter;
         View tvLogin = $(R.id.tv_login);
         tvLogin.setOnClickListener((View v) -> {
-//            MainActivity.start(_this());
             ChooseLabelActivity.start(this);
             finish();
         });
 
-        // mLoginPresenter = new LoginPresenter(this, this);
-        // mLoginPresenter.doLogin("18700000000", "18700000000");
+        mLoginPresenter = new LoginPresenter(this, this);
+        mLoginPresenter.doLogin("18700000000", "18700000000");
 
     }
 
@@ -80,9 +82,8 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
     }
 
     @Override
-    public void onLoginReturned(LoginResponse loginResponse) {
-        MyLogUtil.d("登陆成功返回数据：" + loginResponse.toString());
-        MyLogUtil.d(loginResponse.toString());
+    public void onLoginReturned(List<LoginResponse> loginResponse) {
+        MyLogUtil.d("登陆成功返回数据：" + loginResponse);
     }
 
     @Override

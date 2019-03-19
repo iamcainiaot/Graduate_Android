@@ -7,24 +7,11 @@ package lib_utils.net;
  */
 
 public class NetUrl {
-    //    //AppId
-    public static final String APP_ID = "KK200912141111";
 
-    //  http://39.108.114.57:8080/ssm/emp/100031
-
-    //AppSecret
-    public static final String APP_SECRET = "jwXJrZBFEn2SM3L1w1QWK3QDxYTP2DI6";
-    //客户资源统一路径
-//    public static final String BASE_CLIENT_RES_URL = "http://39.108.114.57:8080/ssm/";
-    public static final String BASE_CLIENT_RES_URL = "http://codenjoyes.com:8081/seckill/";
-    //AppId
-    // public static final String APP_ID = "KK200912141111";
-    // //AppSecret
-    // public static final String APP_SECRET = "jwXJrZBFEn2SM3L1w1QWK3QDxYTP2DI6";
-    // //客户资源统一路径
-    //  //   public static final String BASE_CLIENT_RES_URL = "http://app.kk2009.cn/Api/";
-    // public static final String BASE_CLIENT_RES_URL = "http://localhost:8080/";
-    // //登录
-    // // public static final String LOGIN_URL = BASE_CLIENT_RES_URL + "login";
+    /**
+     * 客户资源统一路径
+     */
+//    public static final String BASE_CLIENT_RES_URL = "http://10.5.222.133:8081/";
+    static final String BASE_CLIENT_RES_URL = "http:10.5.221.105:8081/";
 
 }

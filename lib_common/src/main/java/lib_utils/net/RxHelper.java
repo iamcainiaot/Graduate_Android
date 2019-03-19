@@ -1,11 +1,7 @@
 package lib_utils.net;
 
-
-import android.util.Log;
-
-import mvp.BaseResponse;
-
 import lib_utils.MyLogUtil;
+import mvp.BaseResponse;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -31,13 +27,21 @@ public class RxHelper {
                 return tObservable.flatMap(new Func1<BaseResponse<T>, Observable<T>>() {
                     @Override
                     public Observable<T> call(BaseResponse<T> result) {
-                        if (result.getStatus() == "success" && result.getData() != null) {
-                            result.getData();
-                            MyLogUtil.d("status：" + result.getData().toString());
-                            return createData(result.getData());
-                        } else {
-                            return Observable.error(new Exception(result.getStatus()));
-                        }
+                        return Observable.create(new Observable.OnSubscribe<T>() {
+                            @Override
+                            public void call(Subscriber<? super T> subscriber) {
+                                if (result.getStatus() == BaseResponse.CODE_OK && result.getData() != null) {
+                                    try {
+                                        subscriber.onNext(result.getData());
+                                        subscriber.onCompleted();
+                                    } catch (Exception e) {
+                                        subscriber.onError(e);
+                                    }
+                                } else {
+                                    MyLogUtil.d(getClass().getName(), "出错了！");
+                                }
+                            }
+                        });
                     }
                 })
                         .subscribeOn(Schedulers.io())
@@ -45,28 +49,5 @@ public class RxHelper {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
-
-    }
-
-    /**
-     * 将数据存入subscriber
-     *
-     * @param data
-     * @param <T>
-     * @return
-     */
-    private static <T> Observable<T> createData(final T data) {
-        return Observable.create(new Observable.OnSubscribe<T>() {
-            @Override
-            public void call(Subscriber<? super T> subscriber) {
-                try {
-                    subscriber.onNext(data);
-                    subscriber.onCompleted();
-                } catch (Exception e) {
-                    subscriber.onError(e);
-                }
-            }
-        });
-
     }
 }

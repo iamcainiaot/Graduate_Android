@@ -25,12 +25,11 @@ public class NetHttpApi {
                 .readTimeout(REQUEST_TIME, TimeUnit.SECONDS)
                 .writeTimeout(REQUEST_TIME, TimeUnit.SECONDS);
         mRetrofit = new Retrofit.Builder()
+                .baseUrl(NetUrl.BASE_CLIENT_RES_URL)
                 .client(client.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .baseUrl(NetUrl.BASE_CLIENT_RES_URL)
                 .build();
-
     }
 
     public static NetHttpApi getInstance() {

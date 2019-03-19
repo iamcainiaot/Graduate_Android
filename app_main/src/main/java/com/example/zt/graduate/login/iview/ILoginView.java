@@ -2,6 +2,8 @@ package com.example.zt.graduate.login.iview;
 
 import com.example.zt.graduate.login.model.response.LoginResponse;
 
+import java.util.List;
+
 import mvp.IAddPresenterView;
 
 /**
@@ -20,5 +22,5 @@ public interface ILoginView extends IAddPresenterView {
      *
      * @param loginResponse 返回数据
      */
-    void onLoginReturned(LoginResponse loginResponse);
+    void onLoginReturned(List<LoginResponse> loginResponse);
 }

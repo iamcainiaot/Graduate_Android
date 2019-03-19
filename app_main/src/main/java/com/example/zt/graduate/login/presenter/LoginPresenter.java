@@ -7,10 +7,13 @@ import com.example.zt.graduate.login.model.request.LoginRequest;
 import com.example.zt.graduate.login.model.response.LoginResponse;
 import com.example.zt.graduate.manager.HttpManager;
 
+import java.util.List;
+
 import lib_utils.net.RxSubscribe;
 
 import lib_utils.MyLogUtil;
 import mvp.BasePresenter;
+import mvp.BaseResponse;
 
 /**
  * @author taozhu5
@@ -36,9 +39,9 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
         LoginRequest loginRequest = new LoginRequest(phoneNumber, password);
         mView.get().onLoginStart();
         mHttpManager.doLogin(loginRequest,
-                new RxSubscribe<LoginResponse>(mContext, true) {
+                new RxSubscribe<List<LoginResponse>>(mContext, true) {
                     @Override
-                    protected void _onNext(LoginResponse loginResponse) {
+                    protected void _onNext(List<LoginResponse> loginResponse) {
                         MyLogUtil.d("成功了");
                         mView.get().onLoginReturned(loginResponse);
                     }

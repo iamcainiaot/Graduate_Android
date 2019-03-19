@@ -1,5 +1,9 @@
 package mvp;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 /**
  * @author taozhu5
  * @date 2019/3/13 10:16
@@ -9,32 +13,14 @@ public class BaseResponse<T> {
     /**
      * 状态码
      */
-    private String status;
+    private int status;
+
     /**
      * 信息
      */
-    private String msg;
+    private String message;
 
-    /**
-     * 数据
-     */
     private T data;
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    public void setMsg(String msg) {
-        this.msg = msg;
-    }
 
     public T getData() {
         return data;
@@ -44,12 +30,27 @@ public class BaseResponse<T> {
         this.data = data;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public String getMsg() {
+        return message;
+    }
+
+    public void setMsg(String msg) {
+        this.message = msg;
+    }
+
     @Override
     public String toString() {
         return "BaseResponse{" +
                 "status=" + status +
-                ", msg='" + msg + '\'' +
-                ", data=" + data +
+                ", msg='" + message + '\'' +
                 '}';
     }
 
@@ -65,6 +66,6 @@ public class BaseResponse<T> {
     /**
      * code为success表示请求成功
      */
-    private static final String CODE_OK = "success";
+    public static final int CODE_OK = 200;
 
 }

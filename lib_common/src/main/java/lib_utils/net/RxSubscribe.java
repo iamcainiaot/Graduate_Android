@@ -7,8 +7,8 @@ import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 
 import lib_utils.CommonUtils;
-import retrofit2.adapter.rxjava.HttpException;
-import rx.Subscriber;
+import lib_utils.MyLogUtil;
+import retrofit2.HttpException;
 
 /**
  * @author taozhu5
@@ -16,9 +16,10 @@ import rx.Subscriber;
  * @description 回调封装
  */
 
-public abstract class RxSubscribe<T> extends Subscriber<T> {
+public abstract class RxSubscribe<T> extends rx.Subscriber<T> {
     private Context mContext;
     private ProgressDialog mDialog;
+
     private boolean mShowDialog;
 
     protected RxSubscribe(Context context, boolean showDialog) {
@@ -27,35 +28,17 @@ public abstract class RxSubscribe<T> extends Subscriber<T> {
     }
 
     @Override
+    public void onNext(T t) {
+        _onNext(t);
+    }
+
+    @Override
     public void onCompleted() {
-        if (!isUnsubscribed()) {
-            unsubscribe();
-        }
+        MyLogUtil.d("请求完成");
         if (mDialog != null && mShowDialog) {
             mDialog.dismiss();
         }
         mDialog = null;
-    }
-
-    @Override
-    public void onStart() {
-        if (!CommonUtils.isNetWorkConnected(mContext)) {
-            if (!isUnsubscribed()) {
-                unsubscribe();
-            }
-            _onError("RxSubscribe : 出了问题了");
-        } else {
-            if (mDialog == null && mShowDialog) {
-                mDialog = new ProgressDialog(mContext);
-                mDialog.setMessage("正在加载中...");
-                mDialog.show();
-            }
-        }
-    }
-
-    @Override
-    public void onNext(T t) {
-        _onNext(t);
     }
 
     @Override

@@ -85,7 +85,7 @@ public class ChooseLabelActivity extends BaseMvpActivity {
 
         @Override
         public int getItemCount() {
-            return 20;
+            return CommonUtils.size(list);
         }
 
         class ItemHolder extends RecyclerView.ViewHolder {

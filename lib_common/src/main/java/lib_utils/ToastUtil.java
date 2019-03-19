@@ -2,7 +2,6 @@ package lib_utils;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
-import android.util.Log;
 import android.widget.Toast;
 
 /**
@@ -13,7 +12,6 @@ import android.widget.Toast;
 public class ToastUtil {
     private final static String TAG = "ToastUtil";
 
-    // Toast
     private static Toast toast;
 
     /**
@@ -50,7 +48,7 @@ public class ToastUtil {
             }
             toast.show();
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            MyLogUtil.e(TAG, ex);
         }
     }
 
@@ -70,7 +68,7 @@ public class ToastUtil {
             }
             toast.show();
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            MyLogUtil.e(TAG, ex);
         }
     }
 
@@ -90,7 +88,7 @@ public class ToastUtil {
             }
             toast.show();
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            MyLogUtil.e(TAG, ex);
         }
     }
 
@@ -111,7 +109,7 @@ public class ToastUtil {
             }
             toast.show();
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            MyLogUtil.e(TAG, ex);
         }
     }
 
@@ -132,7 +130,7 @@ public class ToastUtil {
             }
             toast.show();
         } catch (Exception ex) {
-            Log.e(TAG, ex.getMessage());
+            MyLogUtil.e(TAG, ex);
         }
     }
 
