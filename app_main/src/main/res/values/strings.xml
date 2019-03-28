@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">毕业设计</string>
     <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="number_86">+86</string>
+    <string name="username">用户名：</string>
+    <string name="username_hint">手机号</string>
+    <string name="identifying_code">发送验证码</string>
+    <string name="identifying_code_hint">验证码</string>
+    <string name="password">密码：</string>
+    <string name="password_hint">在这儿输入密码</string>
     <string name="searching">寻找</string>
     <string name="heart_wall">心声墙</string>
     <string name="myself">本猫</string>
+    <string name="choose_your_label">选择你的个性标签</string>
+    <string name="choose_your_label_english">choose your label !</string>
 </resources>

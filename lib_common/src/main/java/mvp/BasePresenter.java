@@ -19,7 +19,7 @@ public class BasePresenter<T extends IAddPresenterView> {
         }
     }
 
-    private boolean isDetached() {
+    public boolean isDetached() {
         return mView.get() == null;
     }
 

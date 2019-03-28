@@ -75,6 +75,10 @@ public class CommonUtils {
         return false;
     }
 
+    // 延时5s
+    public static void delay5S(final Activity activity) {
+    }
+
     //倒计时
     public static void CountDown(final Activity activity, final TextView view) {
         new CountDownTimer(60000, 1000) {

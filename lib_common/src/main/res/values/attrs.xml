@@ -159,4 +159,9 @@
         <attr name="leftTextSize" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="UrlMessageView">
+        <attr name="title" /> <!-- 文章标题 -->
+        <attr name="image" /><!-- 默认图片 -->
+
+    </declare-styleable>
 </resources>

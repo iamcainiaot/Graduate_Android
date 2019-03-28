@@ -2,6 +2,9 @@ package com.example.zt.graduate.login;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 
 import com.example.administrator.graduate_android.R;
@@ -11,11 +14,14 @@ import com.example.zt.graduate.login.iview.ILoginView;
 import com.example.zt.graduate.login.model.response.LoginResponse;
 import com.example.zt.graduate.login.presenter.LoginPresenter;
 
+import org.jsoup.Jsoup;
+
 import java.util.List;
 
 import lib_utils.MyLogUtil;
 import lib_utils.db.greendaogen.DaoSession;
 import mvp.BaseMvpActivity;
+import widget.UrlMessageView;
 
 /**
  * @author taozhu5
@@ -34,13 +40,10 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
         context.startActivity(intent);
     }
 
-    @Override
-    public void setStatus() {
-        setStatusMVP();
-    }
-
     private UserApplication mApplication;
     private DaoSession mDaoSession;
+
+    private UrlMessageView urlMessageView;
 
     @Override
     public int layoutId() {
@@ -63,14 +66,14 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
     @Override
     public void initView() {
         LoginPresenter mLoginPresenter;
-        View tvLogin = $(R.id.tv_login);
-        tvLogin.setOnClickListener((View v) -> {
+        View tvUsername = $(R.id.tv_username);
+        tvUsername.setOnClickListener((View v) -> {
             ChooseLabelActivity.start(this);
-            finish();
+            //    finish();
         });
 
-        mLoginPresenter = new LoginPresenter(this, this);
-        mLoginPresenter.doLogin("18700000000", "18700000000");
+        //  mLoginPresenter = new LoginPresenter(this, this);
+        //  mLoginPresenter.doLogin("18700000000", "18700000000");
 
     }
 
@@ -82,10 +85,5 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
     @Override
     public void onLoginReturned(List<LoginResponse> loginResponse) {
         MyLogUtil.d("登陆成功返回数据：" + loginResponse);
-    }
-
-    @Override
-    public void setStatusMVP() {
-        super.setStatusMVP();
     }
 }

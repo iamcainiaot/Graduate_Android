@@ -6,16 +6,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/switch_wifi_to_mobile_hint_str" />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_choose_label"
+    <widget.TitanicTextView.TitanicTextView
+        android:id="@+id/mt_text_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="android.support.v7.widget.GridLayoutManager"
-        app:spanCount="@integer/clock_template_homework_span_count"
-        tools:listitem="@layout/item_choose_label" />
+        android:layout_height="@dimen/dimen_140"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_30"
+        android:paddingBottom="@dimen/dimen_30"
+        android:text="@string/choose_your_label_english"
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_80" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/dimen_20"
+        android:paddingTop="@dimen/dimen_100"
+        android:paddingEnd="@dimen/dimen_20"
+        android:paddingBottom="@dimen/dimen_20">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_choose_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="@integer/clock_template_homework_span_count"
+            tools:listitem="@layout/item_choose_label" />
+    </FrameLayout>
 </LinearLayout>

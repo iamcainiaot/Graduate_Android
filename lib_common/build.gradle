@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'org.greenrobot.greendao'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
     compileSdkVersion 28
@@ -18,6 +19,7 @@ android {
             exclude 'META-INF/LICENSE.txt'
             exclude 'META-INF/NOTICE.txt'
             exclude 'META-INF/rxjava.properties'
+            exclude 'META-INF/services/javax.annotation.processing.Processor'
         }
     }
 
@@ -55,8 +57,8 @@ dependencies {
     compile 'io.reactivex:rxjava:1.1.0'
     compile 'io.reactivex:rxandroid:1.1.0'
     //下面两个是RxJava 和 RxAndroid
-    //   compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
-    //   compile 'io.reactivex.rxjava2:rxjava:2.x.y'
+    //  compile 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    //  compile 'io.reactivex.rxjava2:rxjava:2.x.y'
 
     //retrofit
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -75,5 +77,8 @@ dependencies {
     compile 'com.orhanobut:logger:2.1.1'
     // 数据库
     compile 'org.greenrobot:greendao:3.2.0'
+    // RecyclerView
     compile 'com.android.support:recyclerview-v7:28.0.0'
+    // 解析HTML用
+    compile 'org.jsoup:jsoup:1.9.2'
 }
