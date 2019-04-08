@@ -31,7 +31,6 @@ public class MySelfFragment extends BaseMvpFragment implements View.OnClickListe
 
     @Override
     public int layoutId() {
-        MyLogUtil.d("--------到了我自己的页面来了");
         return R.layout.fragment_myself;
     }
 

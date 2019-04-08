@@ -3,11 +3,16 @@ package com.example.zt.graduate.app;
 import android.support.multidex.BuildConfig;
 import android.support.multidex.MultiDexApplication;
 
-import java.lang.reflect.Method;
+import com.example.zt.graduate.db.greendaogen.DaoSession;
+import com.example.zt.graduate.db.greendaogen.UserInfoTableDao;
+import com.mob.MobSDK;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
+import lib_utils.CommonUtils;
 import lib_utils.MyLogUtil;
 import lib_utils.db.entity.UserInfoTable;
-import lib_utils.db.greendaogen.DaoSession;
 import lib_utils.db.manager.DbManager;
 import lib_utils.disk_cache.DiskCacheManager;
 
@@ -33,6 +38,9 @@ public class UserApplication extends MultiDexApplication {
         initDiskCacheManager();
         showDebugDBAddress();
         initTable();
+
+        // 短信验证码服务
+        MobSDK.init(this);
     }
 
     /**
@@ -40,6 +48,7 @@ public class UserApplication extends MultiDexApplication {
      */
     public void initTable() {
         daoSession = DbManager.getDaoSession(this);
+        //  userInfoTable = daoSession.getUserInfoTableDao().;
         MyLogUtil.d(TAG, "GreeDao初始化！");
     }
 
@@ -52,6 +61,10 @@ public class UserApplication extends MultiDexApplication {
      * 获取数据库对象
      */
     public DaoSession getDaoSession() {
+        MyLogUtil.d("  复制以下代码即可调用数据库" +
+                "      UserApplication userApplication = (UserApplication) getApplication();" +
+                "        mDaoSession = userApplication.getDaoSession();" +
+                "mDaoSession.xxx");
         return daoSession;
     }
 
@@ -84,21 +97,29 @@ public class UserApplication extends MultiDexApplication {
             }
         });
 
-        //     DiskCacheManager.registerClassCacheFileRule(HitWorkListResponse.class,
-        //             new CacheFileRule(DiskCacheConst.HitWorkListData.FILE_NAME,
-        //                     DiskCacheConst.HitWorkListData.DIR_NAME,
-        //                     true));
-
+        // DiskCacheManager.registerClassCacheFileRule(HitWorkListResponse.class,
+        //         new CacheFileRule(DiskCacheConst.HitWorkListData.FILE_NAME,
+        //                 DiskCacheConst.HitWorkListData.DIR_NAME,
+        //                 true));
     }
 
     private UserInfoTable userInfoTable;
 
     public String getCurrentUserId() {
-        if (userInfoTable != null) {
+        userInfoTable = getUserInfoTable();
+        if (getUserInfoTable() != null) {
             return userInfoTable.getUserId();
         }
         MyLogUtil.d(TAG, "出错啦");
         return null;
     }
 
+    public UserInfoTable getUserInfoTable() {
+        UserInfoTableDao userInfoTableDao = getDaoSession().getUserInfoTableDao();
+        List<UserInfoTable> list = userInfoTableDao.queryBuilder().list();
+        if (!CommonUtils.isEmpty(list)) {
+            return list.get(0);
+        }
+        return null;
+    }
 }

@@ -48,11 +48,13 @@ public class LoadingDialog extends Dialog {
   /*  private void showLoadingGif() {
         ImgLoader.INSTANCE.loadGifImage("file:///android_asset/global_loading_gif.gif", mIvLoading);
     }*/
+    @Override
     public void setCanceledOnTouchOutside(boolean cancel) {
         super.setCanceledOnTouchOutside(cancel);
         this.isCanceledOnTouchOutside = cancel;
     }
 
+    @Override
     public void setCancelable(boolean flag) {
         super.setCancelable(flag);
         this.isCancelable = flag;

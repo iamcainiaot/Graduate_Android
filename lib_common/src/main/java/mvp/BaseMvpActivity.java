@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowInsets;
 
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
+import com.github.rahatarmanahmed.cpv.CircularProgressViewListener;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +27,6 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
     private Set<BasePresenter> mPresenters;
 
     protected BaseHeader mHeader;
-
     /**
      * 状态栏背景色
      */
@@ -49,12 +51,15 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
         setContentView(layoutId());
         initData();
         initView();
         initEvent();
         setStatus();
     }
+
+    protected Bundle savedInstanceState;
 
     /**
      * 子类如果 要将内容延伸到状态栏的话就重写此方法，并调用setStatusMVP()方法
@@ -130,7 +135,6 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
 
     @Override
     public void showProgress() {
-
     }
 
     @Override

@@ -32,13 +32,14 @@ public class RxHelper {
                             public void call(Subscriber<? super T> subscriber) {
                                 if (result.getStatus() == BaseResponse.CODE_OK && result.getData() != null) {
                                     try {
+                                        MyLogUtil.d("RxHelper", "返回数据：" + result.getData());
                                         subscriber.onNext(result.getData());
                                         subscriber.onCompleted();
                                     } catch (Exception e) {
                                         subscriber.onError(e);
                                     }
                                 } else {
-                                    MyLogUtil.d(getClass().getName(), "出错了！");
+                                    MyLogUtil.d("RxHelper", "出错了！");
                                 }
                             }
                         });

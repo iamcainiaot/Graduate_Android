@@ -8,6 +8,7 @@ import java.net.SocketTimeoutException;
 
 import lib_utils.CommonUtils;
 import lib_utils.MyLogUtil;
+import lib_utils.ToastUtil;
 import retrofit2.HttpException;
 
 /**
@@ -44,12 +45,15 @@ public abstract class RxSubscribe<T> extends rx.Subscriber<T> {
     @Override
     public void onError(Throwable e) {
         if (!CommonUtils.isNetWorkConnected(mContext)) {
+            ToastUtil.showLong(mContext, "网络不可用...");
             _onError("网络不可用");
             //SocketTimeoutException:服务器响应超时
             //ConnectException:服务器请求超时
         } else if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
+            ToastUtil.showLong(mContext, "请求超时,请稍后再试...");
             _onError("请求超时,请稍后再试...");
         } else if (e instanceof HttpException) {
+            ToastUtil.showLong(mContext, "服务器异常，请稍后再试...");
             _onError("服务器异常，请稍后再试...");
         } else {
             _onError(e.getMessage());

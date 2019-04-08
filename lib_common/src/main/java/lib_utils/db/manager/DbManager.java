@@ -3,8 +3,8 @@ package lib_utils.db.manager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
-import lib_utils.db.greendaogen.DaoMaster;
-import lib_utils.db.greendaogen.DaoSession;
+import com.example.zt.graduate.db.greendaogen.DaoMaster;
+import com.example.zt.graduate.db.greendaogen.DaoSession;
 
 /**
  * 数据库管理类

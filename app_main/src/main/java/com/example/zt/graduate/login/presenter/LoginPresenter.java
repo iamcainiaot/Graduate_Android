@@ -30,11 +30,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
     /**
      * 登陆请求
      *
-     * @param phoneNumber 手机号  （登陆用户名）
-     * @param password    密码
+     * @param userName 用户名（登陆用户名）
+     * @param pwd 密码
      */
-    public void doLogin(String phoneNumber, String password) {
-        LoginRequest loginRequest = new LoginRequest(phoneNumber, password);
+    public void doLogin(String userName, String pwd) {
+        LoginRequest loginRequest = new LoginRequest(userName, pwd);
         mView.get().onLoginStart();
         mHttpManager.doLogin(loginRequest,
                 new RxSubscribe<List<LoginResponse>>(mContext, true) {

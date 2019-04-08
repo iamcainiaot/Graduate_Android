@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
+
 import lib_utils.CommonUtils;
 import widget.LoadingDialog;
 

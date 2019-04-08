@@ -3,10 +3,11 @@ package lib_utils.db.manager;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.zt.graduate.db.greendaogen.DaoMaster;
+
 import org.greenrobot.greendao.database.Database;
 
 import lib_utils.MyLogUtil;
-import lib_utils.db.greendaogen.DaoMaster;
 
 /**
  * @author shyu

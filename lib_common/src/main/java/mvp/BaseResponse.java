@@ -1,5 +1,7 @@
 package mvp;
 
+import lib_utils.CommonUtils;
+
 /**
  * @author taozhu5
  * @date 2019/3/13 10:16
@@ -34,12 +36,12 @@ public class BaseResponse<T> {
         this.status = status;
     }
 
-    public String getMsg() {
+    public String getMessage() {
         return message;
     }
 
-    public void setMsg(String msg) {
-        this.message = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     @Override
@@ -64,4 +66,10 @@ public class BaseResponse<T> {
      */
     public static final int CODE_OK = 200;
 
+    /**
+     * 判断是否请求正常
+     */
+    public boolean isSuccess() {
+        return "请求成功".equals(message);
+    }
 }

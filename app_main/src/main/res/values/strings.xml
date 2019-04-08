@@ -11,7 +11,9 @@
     <string name="password_hint">在这儿输入密码</string>
     <string name="searching">寻找</string>
     <string name="heart_wall">心声墙</string>
-    <string name="myself">本猫</string>
+    <string name="myself">本人</string>
     <string name="choose_your_label">选择你的个性标签</string>
     <string name="choose_your_label_english">choose your label !</string>
+    <string name="click_next">进入主页    ---></string>
+    <string name="now_update_label">正在提交标签</string>
 </resources>

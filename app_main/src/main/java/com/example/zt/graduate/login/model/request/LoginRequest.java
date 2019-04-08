@@ -1,4 +1,6 @@
-package  com.example.zt.graduate.login.model.request;
+package com.example.zt.graduate.login.model.request;
+
+import com.example.zt.graduate.app.UserApplication;
 
 import mvp.BaseRequest;
 
@@ -11,15 +13,15 @@ public class LoginRequest extends BaseRequest {
     /**
      * 登陆手机号
      */
-    String phoneNumber;
+    private String userName;
     /**
      * 登陆密码
      */
-    String password;
+    private String pwd;
 
-    public LoginRequest(String phoneNumber, String password) {
-        this.phoneNumber = phoneNumber;
-        this.password = password;
+    public LoginRequest(String userName, String pwd) {
+        userId = UserApplication.getInstance().getCurrentUserId();
+        this.userName = userName;
+        this.pwd = pwd;
     }
 }
-

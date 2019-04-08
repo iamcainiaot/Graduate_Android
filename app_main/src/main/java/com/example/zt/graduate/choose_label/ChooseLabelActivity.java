@@ -11,11 +11,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.graduate_android.R;
+import com.example.zt.graduate.choose_label.iview.IChooseLabelView;
+import com.example.zt.graduate.choose_label.model.response.ChooseLabelResponse;
+import com.example.zt.graduate.choose_label.presenter.ChooseLabelPresenter;
+import com.example.zt.graduate.main.MainActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import lib_utils.CommonUtils;
+import lib_utils.MyLogUtil;
+import lib_utils.ToastUtil;
 import mvp.BaseMvpActivity;
 import widget.TitanicTextView.Titanic;
 import widget.TitanicTextView.TitanicTextView;
@@ -27,7 +36,7 @@ import widget.recyclerview.MarginDecoration;
  * @date 2019/3/15 14:43
  * @description 标签选择类
  */
-public class ChooseLabelActivity extends BaseMvpActivity {
+public class ChooseLabelActivity extends BaseMvpActivity implements IChooseLabelView {
 
     /**
      * 启动此页面
@@ -44,15 +53,29 @@ public class ChooseLabelActivity extends BaseMvpActivity {
      */
     private static final int PLACE_ONE_ITEM_CHARS = 10;
     private static final int PLACE_TWO_ITEM_CHARS = 20;
+    /**
+     * 用来保存点击了标签多少次
+     */
+    private int clickCount = 0;
+    /**
+     * 选择的标签集合
+     */
+    private Map<Integer, String> mLabelList = new HashMap<>();
 
     /**
-     * 波纹TextView
+     * 点击去主页
      */
-    private TitanicTextView mTitanicTextView;
+    private TextView mTvGo2MainActivity;
+
     /**
      * 适配器对象
      */
     private ChooseLabelAdapter mChooseLabelAdapter;
+
+    /**
+     * 选择标签Presenter
+     */
+    private ChooseLabelPresenter mChooseLabelPresenter;
 
     @Override
     public int layoutId() {
@@ -61,12 +84,19 @@ public class ChooseLabelActivity extends BaseMvpActivity {
 
     @Override
     public void initData() {
-
+        // do nothing
     }
 
     @Override
     public void initView() {
-        mTitanicTextView = findViewById(R.id.mt_text_view);
+        mTvGo2MainActivity = $(R.id.tv_next_2_main_activity);
+        mTvGo2MainActivity.setClickable(false);
+        mTvGo2MainActivity.setOnClickListener(v -> {
+            // 点击进入主页按钮
+            clickGo2MainActivity();
+        });
+        // 波纹TextView
+        TitanicTextView titanicTextView = findViewById(R.id.mt_text_view);
         RecyclerView rvChooseLabel = $(R.id.rv_choose_label);
         List<String> list = addList();
         if (mChooseLabelAdapter == null) {
@@ -80,7 +110,7 @@ public class ChooseLabelActivity extends BaseMvpActivity {
                 int sLength = list.get(i).length();
                 if (sLength < PLACE_ONE_ITEM_CHARS) {
                     return 1;
-                } else if (PLACE_ONE_ITEM_CHARS <= sLength && sLength < PLACE_TWO_ITEM_CHARS) {
+                } else if (PLACE_ONE_ITEM_CHARS < sLength && sLength < PLACE_TWO_ITEM_CHARS) {
                     return 2;
                 } else {
                     return 3;
@@ -92,18 +122,59 @@ public class ChooseLabelActivity extends BaseMvpActivity {
         rvChooseLabel.addItemDecoration(new MarginDecoration(10));
         rvChooseLabel.setAdapter(mChooseLabelAdapter);
         // 设置字体波纹上升
-        mTitanicTextView.setTypeface(Typefaces.get(ChooseLabelActivity.this,
+        titanicTextView.setTypeface(Typefaces.get(ChooseLabelActivity.this,
                 "Satisfy-Regular.ttf"));
-        new Titanic().start(mTitanicTextView);
+        new Titanic().start(titanicTextView);
+    }
+
+    /**
+     * 点击进入主页
+     */
+    private void clickGo2MainActivity() {
+        if (clickCount > 0) {
+            String s;
+            Iterator it = mLabelList.entrySet().iterator();
+            StringBuilder sb = new StringBuilder();
+
+            while (it.hasNext()) {
+                Map.Entry entry = (Map.Entry) it.next();
+                Object key = entry.getValue();
+                sb.append(key.toString());
+            }
+            if (mChooseLabelPresenter == null || mChooseLabelPresenter.isDetached()) {
+                mChooseLabelPresenter = new ChooseLabelPresenter(this, this);
+            }
+            mChooseLabelPresenter.doChooseLabel(sb.toString());
+        } else {
+            ToastUtil.showShort(this, "请至少选择一个个性标签哦~");
+        }
+    }
+
+    @Override
+    public void onChooseLabelStart() {
+        MyLogUtil.d(getLocalClassName() + "开始请求");
+    }
+
+    @Override
+    public void onChooseLabelReturned(List<ChooseLabelResponse> chooseLabelResponses) {
+        MainActivity.start(this);
+        MyLogUtil.d(getLocalClassName() + "返回数据" + chooseLabelResponses);
     }
 
     public class ChooseLabelAdapter extends RecyclerView.Adapter<ChooseLabelAdapter.ItemHolder> {
-
         private List<String> list;
         private String isNull = "1";
 
+        private Map<Integer, Boolean> booleanMap;
+
         ChooseLabelAdapter(List<String> list) {
             this.list = list;
+            setMap();
+        }
+
+        private void setMap() {
+            booleanMap = new HashMap<>(16);
+            booleanMap.put(CommonUtils.size(list), false);
         }
 
         @NonNull
@@ -151,13 +222,25 @@ public class ChooseLabelActivity extends BaseMvpActivity {
                                     R.drawable.shape_choose_label_select);
                             tvChooseLabel.setTextColor(getResources().getColor(
                                     R.color.common_purple));
+                            booleanMap.put(position, true);
                             isChoose = true;
+                            mLabelList.put(position, list.get(position));
+                            clickCount++;
+                            mTvGo2MainActivity.setTextColor(getResources().getColor(R.color.common_purple));
                         } else {
                             CommonUtils.setViewBackground(tvChooseLabel,
                                     R.drawable.shape_choose_label_unselect);
                             tvChooseLabel.setTextColor(getResources().getColor(
                                     R.color.color_font_main_grey));
+                            booleanMap.put(position, false);
                             isChoose = false;
+                            clickCount--;
+                            mLabelList.remove(position);
+                            if (clickCount > 0) {
+                                mTvGo2MainActivity.setTextColor(getResources().getColor(R.color.common_purple));
+                            } else {
+                                mTvGo2MainActivity.setTextColor(getResources().getColor(R.color.color_font_main_grey_2));
+                            }
                         }
                     });
                 }

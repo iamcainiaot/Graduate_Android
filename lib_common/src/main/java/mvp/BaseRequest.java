@@ -3,7 +3,9 @@ package mvp;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 
+import lib_utils.CommonUtils;
 import lib_utils.MyLogUtil;
+import lib_utils.db.entity.UserInfoTable;
 
 /**
  * @author taozhu5
@@ -11,7 +13,7 @@ import lib_utils.MyLogUtil;
  * @description 请求基础类
  */
 public class BaseRequest {
-
+    protected String userId = "";
     private HashMap<String, String> params = new HashMap<String, String>();
 
     public HashMap getParams() {
@@ -44,6 +46,12 @@ public class BaseRequest {
                 MyLogUtil.d("BaseRequest异常：" + e);
             }
         }
+        if (userId == null || "".equals(userId)) {
+            MyLogUtil.d("BaseRequest:出事儿了，userId为空！");
+        } else {
+            params.put("userId", userId);
+        }
+        int s = params.size();
         return params;
     }
 }

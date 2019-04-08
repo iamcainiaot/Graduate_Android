@@ -1,35 +1,37 @@
 package com.example.zt.graduate.login.model.response;
 
+import mvp.BaseResponse;
+
 /**
  * @author taozhu5
  * @date 2019/3/13 09:53
  * @description 登陆响应数据
  */
-public class LoginResponse {
+public class LoginResponse extends BaseResponse {
     /**
      * id  自增主键
      */
     private Long id;
-
     /**
      * 用户id
      */
-    private Integer userId;
-
+    private String userId;
     /**
      * 用户名
      */
     private String userName;
-
-    /**
-     * 年龄
-     */
-    private Integer age;
-
     /**
      * 性别
      */
-    private String gender;
+    private String sex;
+    /**
+     * 个性标签
+     */
+    private String label;
+    /**
+     * 用户头像
+     */
+    private String imageUrl;
 
     public Long getId() {
         return id;
@@ -39,11 +41,11 @@ public class LoginResponse {
         this.id = id;
     }
 
-    public Integer getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -51,25 +53,34 @@ public class LoginResponse {
         return userName;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setGender(String gender) {
 
-        this.gender = gender;
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     @Override
@@ -78,8 +89,9 @@ public class LoginResponse {
                 "id=" + id +
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", age=" + age +
-                ", gender='" + gender + '\'' +
+                ", sex='" + sex + '\'' +
+                ", label='" + label + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
                 '}';
     }
 }

@@ -2,26 +2,28 @@ package com.example.zt.graduate.login;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
+import android.widget.TextView;
 
 import com.example.administrator.graduate_android.R;
 import com.example.zt.graduate.app.UserApplication;
 import com.example.zt.graduate.choose_label.ChooseLabelActivity;
+import com.example.zt.graduate.db.greendaogen.DaoSession;
 import com.example.zt.graduate.login.iview.ILoginView;
 import com.example.zt.graduate.login.model.response.LoginResponse;
 import com.example.zt.graduate.login.presenter.LoginPresenter;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
-import org.jsoup.Jsoup;
-
+import java.util.HashMap;
 import java.util.List;
 
+import cn.smssdk.EventHandler;
+import cn.smssdk.SMSSDK;
+import cn.smssdk.gui.RegisterPage;
+import lib_utils.CommonUtils;
 import lib_utils.MyLogUtil;
-import lib_utils.db.greendaogen.DaoSession;
+import lib_utils.db.entity.UserInfoTable;
 import mvp.BaseMvpActivity;
-import widget.UrlMessageView;
 
 /**
  * @author taozhu5
@@ -40,10 +42,23 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
         context.startActivity(intent);
     }
 
-    private UserApplication mApplication;
-    private DaoSession mDaoSession;
+    /**
+     * 发送验证码
+     */
+    private TextView tvPassword;
 
-    private UrlMessageView urlMessageView;
+    /**
+     * 登陆按钮
+     */
+    private TextView tvLogin;
+
+    private LoginPresenter mLoginPresenter;
+
+    /**
+     * GreenDao相关操作
+     */
+    private UserApplication mUserApplication;
+    private DaoSession mDaoSession;
 
     @Override
     public int layoutId() {
@@ -52,29 +67,52 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
 
     @Override
     public void initData() {
-        mApplication = (UserApplication) getApplication();
-        mDaoSession = mApplication.getDaoSession();
-        // DaoSession对象已经进行过初始化了
-        // 增
-        //   mDaoSession.insertOrReplace();
-        //   mDaoSession.insert();
-        // 改
-        // mDaoSession.update();
-        // ...
+        mUserApplication = (UserApplication) getApplication();
+        mDaoSession = mUserApplication.getDaoSession();
     }
 
     @Override
     public void initView() {
-        LoginPresenter mLoginPresenter;
+
         View tvUsername = $(R.id.tv_username);
         tvUsername.setOnClickListener((View v) -> {
-            ChooseLabelActivity.start(this);
+            // ChooseLabelActivity.start(this);
             //    finish();
         });
+        tvLogin = $(R.id.tv_login);
+        tvLogin.setOnClickListener(v -> {
+            CommonUtils.isFastDoubleClick();
+            mLoginPresenter = new LoginPresenter(this, this);
+            mLoginPresenter.doLogin("18700000000", "18700000000");
+        });
+        tvPassword = $(R.id.tv_password);
+        tvPassword.setOnClickListener(v -> {
+            sendCode(this);
+        });
+    }
 
-        //  mLoginPresenter = new LoginPresenter(this, this);
-        //  mLoginPresenter.doLogin("18700000000", "18700000000");
+    public void sendCode(Context context) {
+        RegisterPage page = new RegisterPage();
+        //如果使用我们的ui，没有申请模板编号的情况下需传null
+        page.setTempCode(null);
+        page.setRegisterCallback(new EventHandler() {
+            @Override
+            public void afterEvent(int event, int result, Object data) {
+                if (result == SMSSDK.RESULT_COMPLETE) {
+                    // 处理成功的结果
+                    HashMap<String, Object> phoneMap = (HashMap<String, Object>) data;
+                    // 国家代码，如“86”
+                    String country = (String) phoneMap.get("86");
+                    // 手机号码，如“13800138000”
+                    String phone = (String) phoneMap.get("15155487396");
 
+                    // TODO 利用国家代码和手机号码进行后续的操作
+                } else {
+                    // TODO 处理错误的结果
+                }
+            }
+        });
+        page.show(context);
     }
 
     @Override
@@ -83,7 +121,22 @@ public class LoginActivity extends BaseMvpActivity implements ILoginView {
     }
 
     @Override
-    public void onLoginReturned(List<LoginResponse> loginResponse) {
-        MyLogUtil.d("登陆成功返回数据：" + loginResponse);
+    public void onLoginReturned(List<LoginResponse> loginResponseList) {
+        MyLogUtil.d("登陆请求成功返回数据：" + loginResponseList);
+        LoginResponse loginResponse1 = loginResponseList.get(0);
+        // 状态码为200 且为请求成功
+        if (loginResponse1.isOK() && loginResponse1.isSuccess()) {
+            // id （自增）  userId userName sex label imageUrl
+            UserInfoTable userInfoTable = new UserInfoTable(loginResponse1.getUserId(), loginResponse1.getUserName(), loginResponse1.getSex(), loginResponse1.getLabel(), loginResponse1.getImageUrl());
+            // 不同则需做操作
+            if (!userInfoTable.equals(mUserApplication.getUserInfoTable())) {
+                mUserApplication.getDaoSession().clear();
+                // 插入数据到表中
+                mDaoSession.insertOrReplace(userInfoTable);
+            }
+            MyLogUtil.d(getLocalClassName() + mUserApplication.getUserInfoTable().toString());
+            // 跳转到选择个性标签界面
+            ChooseLabelActivity.start(this);
+        }
     }
 }

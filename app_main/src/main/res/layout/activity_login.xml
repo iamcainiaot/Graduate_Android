@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_login">
@@ -9,8 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:paddingStart="@dimen/dimen_20"
-        android:paddingEnd="@dimen/dimen_20"
+        android:paddingStart="@dimen/dimen_26"
+        android:paddingEnd="@dimen/dimen_26"
         android:paddingBottom="@dimen/dimen_100">
 
         <LinearLayout
@@ -18,7 +19,8 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape_login"
             android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_2">
 
             <TextView
                 android:id="@+id/tv_username"
@@ -30,21 +32,20 @@
                 android:padding="@dimen/dimen_20"
                 android:text="@string/number_86"
                 android:textColor="@color/color_font_normal"
-                android:textSize="@dimen/font_30" />
+                android:textSize="@dimen/font_32" />
 
             <EditText
                 android:id="@+id/et_username"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@null"
-                android:hint="@string/username_hint"
+                android:background="@color/color_grey_2"
                 android:paddingStart="@dimen/dimen_20"
                 android:paddingEnd="@dimen/dimen_20"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_30" />
-
+            <!--    android:hint="@string/username_hint"   -->
         </LinearLayout>
 
         <LinearLayout
@@ -52,20 +53,21 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dimen_100"
             android:background="@drawable/shape_login"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/dimen_2">
 
             <EditText
                 android:id="@+id/et_password"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                android:background="@null"
-                android:hint="@string/identifying_code_hint"
+                android:background="@color/color_grey_2"
                 android:paddingStart="@dimen/dimen_20"
                 android:paddingEnd="@dimen/dimen_20"
                 android:singleLine="true"
                 android:textColor="@color/black"
                 android:textSize="@dimen/font_30" />
+            <!--android:hint="@string/identifying_code_hint"-->
 
             <TextView
                 android:id="@+id/tv_password"
@@ -77,54 +79,86 @@
                 android:padding="@dimen/dimen_20"
                 android:text="@string/identifying_code"
                 android:textColor="@color/color_font_normal"
-                android:textSize="@dimen/font_30" />
+                android:textSize="@dimen/font_32" />
 
         </LinearLayout>
 
     </TableLayout>
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tl_username_and_password"
+        android:gravity="center"
+        android:paddingTop="@dimen/dimen_12"
+        android:paddingBottom="@dimen/dimen_12"
+        android:text="@string/login"
+        android:textColor="@color/common_purple"
+        android:textSize="@dimen/font_48" />
 
     <LinearLayout
         android:id="@+id/other_login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dimen_100">
+        android:layout_marginBottom="@dimen/dimen_100"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/dimen_100"
+        android:paddingEnd="@dimen/dimen_100">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="@dimen/dimen_100"
-                android:layout_height="@dimen/dimen_100"
-                android:background="@drawable/qq" />
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_90"
+                android:layout_weight="1"
+                android:src="@drawable/qq" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/qq_login" />
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dimen_90"
+                android:layout_weight="1"
+                android:src="@drawable/icon_phone" />
+
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_marginTop="@dimen/dimen_10"
             android:gravity="center"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="@dimen/dimen_100"
-                android:layout_height="@dimen/dimen_100"
-                android:background="@drawable/icon_phone1" />
+            android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/phone_number_login" />
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/qq_login"
+
+                android:textColor="@color/color_font_normal"
+                android:textSize="@dimen/font_32" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/phone_number_login"
+                android:textColor="@color/color_font_normal"
+                android:textSize="@dimen/font_32" />
         </LinearLayout>
     </LinearLayout>
 
+    <com.github.rahatarmanahmed.cpv.CircularProgressView
+        android:id="@+id/progress_view"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_centerInParent="true"
+        app:cpv_indeterminate="true" />
 </RelativeLayout>

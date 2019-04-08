@@ -26,4 +26,11 @@
     <color name="color_font_clock_gray">#7D8385</color>
     <color name="color_font_clock_notification_hint">#A1ABAE</color>
 
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="green">#27D34D</color>
+    <color name="blue">#2A91BD</color>
+    <color name="orange">#FF9D2F</color>
+    <color name="red">#FF432F</color>
 </resources>

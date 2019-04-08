@@ -112,7 +112,7 @@ public class CommonUtils {
     public static boolean isFastDoubleClick() {
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime;
-        if (timeD >= 0 && timeD <= 200) {//两次间隔时间太短就认为是快速点击
+        if (timeD >= 0 && timeD <= 300) {//两次间隔时间太短就认为是快速点击
             return true;
         } else {
             lastClickTime = time;

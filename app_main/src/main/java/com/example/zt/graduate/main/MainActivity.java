@@ -2,16 +2,24 @@ package com.example.zt.graduate.main;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.support.v4.view.ViewPager;
 
 import com.example.administrator.graduate_android.R;
+import com.example.zt.graduate.main.adapter.MyPagerAdapter;
 import com.example.zt.graduate.main.fragment.HeartWallFragment;
 import com.example.zt.graduate.main.fragment.MySelfFragment;
 import com.example.zt.graduate.main.fragment.SearchingFragment;
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.BottomBarBadge;
+import com.roughike.bottombar.OnMenuTabClickListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import mvp.BaseMvpActivity;
 
@@ -32,142 +40,116 @@ public class MainActivity extends BaseMvpActivity {
         context.startActivity(intent);
     }
 
-    private enum FragmentType {
-        /**
-         * 心声墙
-         */
-        HEART_WALL,
-        /**
-         * 寻找
-         */
-        SEARCHING,
-        /**
-         * 我的
-         */
-        MYSELF
+    private BottomBarBadge unreadMessages;
+    private BottomBar mBottomBar;
+    private HeartWallFragment mHeartWallFragment;
+    private SearchingFragment mSearchingFragment;
+    private MySelfFragment mMySelfFragment;
+    private ViewPager viewPager;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        CoordinatorLayout mCoordinator = findViewById(R.id.mCoordinator);
+        viewPager = findViewById(R.id.viewPager);
+        initViewPager();
+
+        mBottomBar = BottomBar.attachShy(mCoordinator, viewPager, savedInstanceState);
+        mBottomBar.setItems(R.menu.bottombar_menu);
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                //单击事件 menuItemId 是 R.menu.bottombar_menu 中 item 的 id
+                switch (menuItemId) {
+                    case R.id.menu_heartwall:
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorPrimary));
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.menu_searching:
+                        viewPager.setCurrentItem(1);
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorAccent));
+                        break;
+                    case R.id.menu_myself:
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.green));
+                        viewPager.setCurrentItem(2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+                //重选事件，当前已经选择了这个，又点了这个tab。微博点击首页刷新页面
+            }
+        });
+        setMsg();
     }
 
-    /**
-     * 心声墙Fragment
-     */
-    private HeartWallFragment mHeartWallFragment;
-    /**
-     * 我的Fragment
-     */
-    private MySelfFragment mMySelfFragment;
-    /**
-     * 寻找Fragment
-     */
-    private SearchingFragment mSearchingFragment;
-    /**
-     * 心声墙
-     */
-    private View ctHeartWall;
-    /**
-     * 寻找
-     */
-    private View ctSearching;
-    /**
-     * 我的
-     */
-    private View ctMySelf;
-    /**
-     * 当前正在显示的Fragment
-     */
-    private Fragment mCurrentShowFragment;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        //保存BottomBar的状态
+        mBottomBar.onSaveInstanceState(outState);
+    }
+
+
+    private void initViewPager() {
+        List<Fragment> fragmentList = new ArrayList<>();
+        fragmentList.add(null == mHeartWallFragment ? mHeartWallFragment = HeartWallFragment.getInstance() : mHeartWallFragment);
+        fragmentList.add(null == mSearchingFragment ? mSearchingFragment = SearchingFragment.getInstance() : mSearchingFragment);
+        fragmentList.add(null == mMySelfFragment ? mMySelfFragment = MySelfFragment.getInstance() : mMySelfFragment);
+        // fragmentList.add(null == fourFragment ? fourFragment = FourFragment.newInstance() : fourFragment);
+        viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragmentList));
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mBottomBar.selectTabAtPosition(position, true);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+    }
+
+    private void setMsg() {
+        // 为tab设置一个标签，“信息”提示的数字
+        // 参数分别是：第几个tab；小圆圈的颜色；显示的数字
+        unreadMessages = mBottomBar.makeBadgeForTabAt(1, "#FF0000", 13);
+
+        // 设置显示或隐藏
+        unreadMessages.show();
+        //  unreadMessages.hide();
+        // 设置显示的数字
+        // unreadMessages.setCount(4);
+
+        // 设置显示/消失动画的延迟时间
+        unreadMessages.setAnimationDuration(200);
+
+        // 如果不点它，它一直显示
+        unreadMessages.setAutoShowAfterUnSelection(true);
+    }
 
     @Override
     public int layoutId() {
-        return R.layout.activity_main;
+        return R.layout.bottombar_viewpager_layout;
     }
 
     @Override
     public void initData() {
-        // do nothing
+
     }
 
     @Override
     public void initView() {
-        ctHeartWall = $(R.id.ct_heart_wall);
-        ctMySelf = $(R.id.ct_myself);
-        ctSearching = $(R.id.ct_searching);
 
-        ctSearching.setOnClickListener((View v) -> {
-            showFragment(FragmentType.SEARCHING);
-        });
-        ctMySelf.setOnClickListener((View v) -> {
-            showFragment(FragmentType.MYSELF);
-        });
-        ctHeartWall.setOnClickListener((View v) -> {
-            showFragment(FragmentType.HEART_WALL);
-        });
-        showFragment(FragmentType.SEARCHING);
-    }
-
-    /**
-     * @author taozhu5
-     * @date 2019/3/13 12:27
-     * @description 显示fragment
-     */
-    public void showFragment(FragmentType fragmentType) {
-        Fragment showFragment;
-        TextView tvHeartWall = $(R.id.tv_heart_wall);
-        ImageView ivHeartWall = $(R.id.iv_heart_wall);
-        TextView tvSearching = $(R.id.tv_searching);
-        ImageView ivSearching = $(R.id.iv_searching);
-        TextView tvMyself = $(R.id.tv_myself);
-        ImageView ivMyself = $(R.id.iv_myself);
-        if (fragmentType == FragmentType.HEART_WALL) {
-            if (mHeartWallFragment == null) {
-                mHeartWallFragment = new HeartWallFragment();
-            }
-            showFragment = mHeartWallFragment;
-            tvHeartWall.setSelected(true);
-            ivHeartWall.setSelected(true);
-            tvSearching.setSelected(false);
-            ivSearching.setSelected(false);
-            tvMyself.setSelected(false);
-            ivMyself.setSelected(false);
-        } else if (fragmentType == FragmentType.SEARCHING) {
-            if (mSearchingFragment == null) {
-                mSearchingFragment = new SearchingFragment();
-            }
-            showFragment = mSearchingFragment;
-            tvHeartWall.setSelected(false);
-            ivHeartWall.setSelected(false);
-            tvSearching.setSelected(true);
-            ivSearching.setSelected(true);
-            tvMyself.setSelected(false);
-            ivMyself.setSelected(false);
-        } else {
-            if (mMySelfFragment == null) {
-                mMySelfFragment = new MySelfFragment();
-            }
-            showFragment = mMySelfFragment;
-            tvHeartWall.setSelected(false);
-            ivHeartWall.setSelected(false);
-            tvSearching.setSelected(false);
-            ivSearching.setSelected(false);
-            tvMyself.setSelected(true);
-            ivMyself.setSelected(true);
-        }
-
-        //说明是同样的
-        if (mCurrentShowFragment == showFragment) {
-            return;
-        }
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        //  说明是第一次添加
-        if (!showFragment.isAdded()) {
-            transaction.add(R.id.fragment_container, showFragment);
-            if (mCurrentShowFragment != null) {
-                transaction.hide(mCurrentShowFragment);
-            }
-        } else {
-            transaction.hide(mCurrentShowFragment).show(showFragment);
-        }
-        transaction.commitAllowingStateLoss();
-        mCurrentShowFragment = showFragment;
     }
 }

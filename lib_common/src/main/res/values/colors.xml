@@ -16,27 +16,16 @@
     <color name="edit_text_color">#333333</color><!-- 页面输入处文字颜色 -->
     <color name="common_blue">#00baff</color><!-- 统一蓝色配置 -->
 
-
-
-
-
-
-
-
-
     <!-- 统一紫色配置 -->
-    <color name="common_purple">#DA70D6</color>
+    <color name="common_purple">#E187DD</color>
     <color name="dan_purple">#FFBBFF</color>
+    <color name="dan_dan_purple">#FFFFFE</color>
+    <color name="yellow">#FFF8DC</color>
+
     <!-- 统一紫色配置 -->
     <color name="color_grey">#0f1b1b1b</color>
-
-
-
-
-
-
-
-
+    <color name="color_grey_2">#D1D1D1</color>
+    <color name="color_grey_3">#EDEDED</color>
 
 
     <color name="white">#ffffff</color>

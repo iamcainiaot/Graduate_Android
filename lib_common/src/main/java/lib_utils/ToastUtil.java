@@ -1,7 +1,6 @@
 package lib_utils;
 
 import android.content.Context;
-import android.support.annotation.StringRes;
 import android.widget.Toast;
 
 /**
@@ -23,7 +22,8 @@ public class ToastUtil {
     public static void showShort(Context context, CharSequence message) {
         try {
             if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
+                //  toast = Toasty.normal(context, message);
+                toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
             } else {
                 toast.setText(message);
             }
@@ -33,24 +33,6 @@ public class ToastUtil {
         }
     }
 
-    /**
-     * 短时间显示Toast
-     *
-     * @param context
-     * @param message
-     */
-    public static void showShort(Context context, @StringRes int message) {
-        try {
-            if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT);
-            } else {
-                toast.setText(message);
-            }
-            toast.show();
-        } catch (Exception ex) {
-            MyLogUtil.e(TAG, ex);
-        }
-    }
 
     /**
      * 长时间显示Toast
@@ -73,26 +55,6 @@ public class ToastUtil {
     }
 
     /**
-     * 长时间显示Toast
-     *
-     * @param context
-     * @param message
-     */
-    public static void showLong(Context context, @StringRes int message) {
-        try {
-            if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
-            } else {
-                toast.setText(message);
-            }
-            toast.show();
-        } catch (Exception ex) {
-            MyLogUtil.e(TAG, ex);
-        }
-    }
-
-    /**
      * 自定义显示Toast时间
      *
      * @param context
@@ -100,27 +62,6 @@ public class ToastUtil {
      * @param duration
      */
     public static void show(Context context, CharSequence message, int duration) {
-        try {
-            if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, duration);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
-            } else {
-                toast.setText(message);
-            }
-            toast.show();
-        } catch (Exception ex) {
-            MyLogUtil.e(TAG, ex);
-        }
-    }
-
-    /**
-     * 自定义显示Toast时间
-     *
-     * @param context
-     * @param message
-     * @param duration
-     */
-    public static void show(Context context, @StringRes int message, int duration) {
         try {
             if (null == toast) {
                 toast = Toast.makeText(context.getApplicationContext(), message, duration);

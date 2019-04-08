@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+// 短信验证码服务
+apply plugin: 'com.mob.sdk'
 
 android {
     compileSdkVersion 28
@@ -28,10 +30,19 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:28.0.0'
+    // 底部栏
+    compile 'com.android.support:design:28.+'
+    compile 'com.roughike:bottom-bar:1.3.+'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:multidex:1.0.0' // 磁盘管理工具
     implementation project(':lib_common')
+}
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2ab13107f9e1e"
+    appSecret "93fc5ddb8582ff1bb65abe7b4893277c"
+    SMSSDK {}
 }
