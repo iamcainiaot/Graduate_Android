@@ -5,14 +5,25 @@ apply plugin: 'com.mob.sdk'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.taozhu5.graduateproject2"
-        minSdkVersion 19
+        applicationId "com.example.zt.graduate"
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         javaCompileOptions { annotationProcessorOptions { includeCompileClasspath = true } }
         multiDexEnabled true
+
+        // 极光IM
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64', 'mips', 'mips64'
+        }
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : "441053a9a03a24717c859873", //JPush上注册的包名对应的appkey.
+                JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
+        ]
     }
     buildTypes {
         release {
@@ -37,8 +48,15 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:multidex:1.0.0' // 磁盘管理工具
+    compile 'com.android.support:multidex:1.0.0'
+    // 选中按钮
+    compile 'com.github.zcweng:switch-button:0.0.3@aar'
+    // 极光
+    compile 'cn.jiguang.sdk:jmessage:2.8.2'  // 此处以JMessage 2.8.2 版本为例。
+    compile 'cn.jiguang.sdk:jcore:1.2.7'  // 此处以JCore 1.2.7 版本为例。
+    // 磁盘管理工具
     implementation project(':lib_common')
+    implementation files('libs/open_sdk_r6008_lite.jar')
 }
 // 在MobSDK的扩展中注册SMSSDK的相关信息
 MobSDK {

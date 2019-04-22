@@ -11,12 +11,26 @@ import mvp.BaseRequest;
  */
 public class ChooseLabelRequest extends BaseRequest {
     /**
+     * 用户Id
+     */
+    private String userId;
+    /**
      * 选择的标签
      */
     private String label;
+    /**
+     * 是否是男性
+     */
+    private boolean isMale;
+    /**
+     * 头像地址
+     */
+    private String imageUrl;
 
-    public ChooseLabelRequest(String label) {
-        userId = UserApplication.getInstance().getCurrentUserId();
+    public ChooseLabelRequest(String userId, String label, boolean isMale, String imageUrl) {
+        this.userId = userId;
         this.label = label;
+        this.isMale = isMale;
+        this.imageUrl = imageUrl;
     }
 }

@@ -1,6 +1,7 @@
 package lib_utils;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.FeatureInfo;
@@ -17,6 +18,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.util.ArrayMap;
 import android.text.TextPaint;
@@ -25,9 +27,14 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.Glide;
+import com.example.lib_common.R;
+import com.github.rahatarmanahmed.cpv.CircularProgressView;
 
 import java.io.File;
 import java.io.IOException;
@@ -43,6 +50,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Random;
 import java.util.TreeMap;
 
 /**
@@ -797,5 +805,107 @@ public class CommonUtils {
 
     public static boolean isExcellent(float score) {
         return Math.round(score * 20) >= 85;
+    }
+
+    static Dialog dia;
+
+    /**
+     * 点击图片展示大图
+     *
+     * @return
+     */
+    public static void imagePreview(Context context, String url) {
+        ImageView imageView;
+
+        // 初始化图片预览Dialog
+        dia = new Dialog(context, R.style.edit_AlertDialog_style);
+        dia.setContentView(R.layout.activity_start_dialog);
+        imageView = (ImageView) dia.findViewById(R.id.start_img);
+        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
+        dia.setCanceledOnTouchOutside(true);
+        Window w = dia.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.x = 0;
+        lp.y = 40;
+        dia.onWindowAttributesChanged(lp);
+
+        dia.show();
+        Glide.with(context).load(url).into(imageView);
+        imageView.setOnClickListener(
+                view -> dia.dismiss());
+    }
+
+    /**
+     * 进度条
+     *
+     * @return
+     */
+    public static void progressBar(Dialog dia) {
+        CircularProgressView circularProgressView;
+
+        circularProgressView = dia.findViewById(R.id.start_img);
+        //选择true的话点击其他地方可以使dialog消失，为false的话不会消失
+        dia.setCanceledOnTouchOutside(false);
+        Window w = dia.getWindow();
+        WindowManager.LayoutParams lp = w.getAttributes();
+        lp.x = 0;
+        lp.y = 40;
+        dia.onWindowAttributesChanged(lp);
+        dia.show();
+        circularProgressView.setOnClickListener(
+                view -> dia.dismiss());
+    }
+
+    public static void progressBarStop(Dialog dia) {
+        dia.dismiss();
+    }
+
+    private static final int REQUEST_EXTERNAL_STORAGE = 1;
+    private static String[] PERMISSIONS_STORAGE = {
+            "android.permission.READ_EXTERNAL_STORAGE",
+            "android.permission.WRITE_EXTERNAL_STORAGE"};
+
+    public static void verifyStoragePermissions(Activity activity) {
+        try {
+            //检测是否有写的权限
+            int permission = ActivityCompat.checkSelfPermission(activity,
+                    "android.permission.WRITE_EXTERNAL_STORAGE");
+            if (permission != PackageManager.PERMISSION_GRANTED) {
+                // 没有写的权限，去申请写的权限，会弹出对话框
+                ActivityCompat.requestPermissions(activity, PERMISSIONS_STORAGE, REQUEST_EXTERNAL_STORAGE);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 获取随机图片
+     */
+    public static String getRandomImgUrl() {
+        String[] array = {
+                "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/sign=d8" +
+                        "d48aa8a151f3dedcb2bf64a4eff0ec/4610b912c8fcc3ce863f8b519c45d688d53f20d0.jpg"
+
+                , "https://ss2.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/image/h%3D300/s" +
+                "ign=f888027cebdde711f8d245f697eecef4/71cf3bc79f3df8dcfcea3de8c311728b461028f7.jpg"
+
+                , "https://ss0.baidu.com/-Po3dSag_xI4khGko9WTAnF6hhy/im" +
+                "age/h%3D300/sign=3a82cecba7014c08063b2ea53a7a025b/359b033b5bb5c9eac6684081db39b6003af3b33d.jpg"
+
+                , "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoW" +
+                "K1HF6hhy/it/u=2092436646,1722038551&fm=26&gp=0.jpg"
+
+                , "https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/" +
+                "it/u=2092436646,1722038551&fm=26&gp=0.jpg"
+
+                , "https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=2068613769,2319387558&fm=26&gp=0.jpg"};
+        int size = array.length;
+        int s = new Random().nextInt(size);
+        if (s == 0) {
+            return array[s];
+        } else {
+            return array[s - 1];
+        }
     }
 }

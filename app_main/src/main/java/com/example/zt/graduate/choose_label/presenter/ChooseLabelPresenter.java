@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.zt.graduate.choose_label.iview.IChooseLabelView;
 import com.example.zt.graduate.choose_label.model.request.ChooseLabelRequest;
 import com.example.zt.graduate.choose_label.model.response.ChooseLabelResponse;
-import com.example.zt.graduate.manager.HttpManager;
+import com.example.zt.graduate.manager.UserInfoManager;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import mvp.BasePresenter;
  * @description 登陆请求
  */
 public class ChooseLabelPresenter extends BasePresenter<IChooseLabelView> {
-    private HttpManager mHttpManager = new HttpManager();
+    private UserInfoManager mUserInfoManager = new UserInfoManager();
     private Context mContext;
 
     public ChooseLabelPresenter(IChooseLabelView view, Context context) {
@@ -29,13 +29,11 @@ public class ChooseLabelPresenter extends BasePresenter<IChooseLabelView> {
 
     /**
      * 登陆请求
-     *
-     * @param label 标签
      */
-    public void doChooseLabel(String label) {
-        ChooseLabelRequest chooseLabelRequest = new ChooseLabelRequest(label);
+    public void doChooseLabel(String userId, String label, boolean isMale, String imageUrl) {
+        ChooseLabelRequest chooseLabelRequest = new ChooseLabelRequest(userId,label, isMale, imageUrl);
         mView.get().onChooseLabelStart();
-        mHttpManager.doChooseLabel(chooseLabelRequest,
+        mUserInfoManager.doChooseLabel(chooseLabelRequest,
                 new RxSubscribe<List<ChooseLabelResponse>>(mContext, true) {
                     @Override
                     protected void _onNext(List<ChooseLabelResponse> chooseLabelResponses) {

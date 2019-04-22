@@ -1,6 +1,8 @@
 package mvp;
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
@@ -11,11 +13,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowInsets;
 
+import com.example.lib_common.R;
 import com.github.rahatarmanahmed.cpv.CircularProgressView;
-import com.github.rahatarmanahmed.cpv.CircularProgressViewListener;
 
 import java.util.HashSet;
 import java.util.Set;
+
+import lib_utils.CommonUtils;
 
 /**
  * @author taozhu5
@@ -27,6 +31,7 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
     private Set<BasePresenter> mPresenters;
 
     protected BaseHeader mHeader;
+    private Context mContext;
     /**
      * 状态栏背景色
      */
@@ -53,6 +58,7 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
         super.onCreate(savedInstanceState);
         this.savedInstanceState = savedInstanceState;
         setContentView(layoutId());
+        mContext = _this();
         initData();
         initView();
         initEvent();
@@ -123,48 +129,19 @@ public abstract class BaseMvpActivity extends BaseActivity implements IBaseMvpAc
         super.onDestroy();
     }
 
-    @Override
-    public void showToast(String msg) {
-
-    }
-
-    @Override
-    public void showLongToast(String msg) {
-
-    }
+    private Dialog mDia;
 
     @Override
     public void showProgress() {
-    }
-
-    @Override
-    public void showProgress(boolean flag, String message) {
-
-    }
-
-    @Override
-    public void showProgress(boolean flag) {
-
+        // 初始化图片预览Dialog
+        mDia = new Dialog(mContext, R.style.edit_AlertDialog_style);
+        mDia.setContentView(R.layout.activity_progress_bar_dialog);
+        CommonUtils.progressBar(mDia);
     }
 
     @Override
     public void hideProgress() {
-
-    }
-
-    @Override
-    public void showToast(int resId) {
-
-    }
-
-    @Override
-    public void close() {
-
-    }
-
-    @Override
-    public void showProgress(String message) {
-
+        CommonUtils.progressBarStop(mDia);
     }
 
     @Override

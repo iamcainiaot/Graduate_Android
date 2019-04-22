@@ -50,7 +50,7 @@ public abstract class BaseHeader extends RelativeLayout {
         {
             mRightTitle.setOnClickListener((View v) -> {
                 if (mOnTitleClickListener != null) {
-                    mOnTitleClickListener.onLeftClick(v);
+                    mOnTitleClickListener.onRightClick(v);
                 }
             });
         }

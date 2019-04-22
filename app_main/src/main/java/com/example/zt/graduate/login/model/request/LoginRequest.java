@@ -14,14 +14,9 @@ public class LoginRequest extends BaseRequest {
      * 登陆手机号
      */
     private String userName;
-    /**
-     * 登陆密码
-     */
-    private String pwd;
 
-    public LoginRequest(String userName, String pwd) {
+    public LoginRequest(String userName) {
         userId = UserApplication.getInstance().getCurrentUserId();
         this.userName = userName;
-        this.pwd = pwd;
     }
 }

@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_heartwall"
-        android:icon="@drawable/ic_main"
+        android:icon="@drawable/icon_heart_wall"
         android:title="@string/heart_wall" />
     <item
         android:id="@+id/menu_searching"
-        android:icon="@drawable/ic_chart"
+        android:icon="@drawable/icon_search"
         android:title="@string/searching" />
     <item
         android:id="@+id/menu_myself"
-        android:icon="@drawable/ic_about"
+        android:icon="@drawable/icon_myself"
         android:title="@string/myself" />
 </menu>

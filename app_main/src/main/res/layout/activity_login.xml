@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_login">
@@ -40,6 +41,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:background="@color/color_grey_2"
+                android:inputType="number"
                 android:paddingStart="@dimen/dimen_20"
                 android:paddingEnd="@dimen/dimen_20"
                 android:singleLine="true"
@@ -47,6 +49,12 @@
                 android:textSize="@dimen/font_30" />
             <!--    android:hint="@string/username_hint"   -->
         </LinearLayout>
+
+        <widget.RoundImageView
+            android:id="@+id/iv_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/app_icon" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,11 +65,12 @@
             android:padding="@dimen/dimen_2">
 
             <EditText
-                android:id="@+id/et_password"
+                android:id="@+id/et_code"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
                 android:background="@color/color_grey_2"
+                android:inputType="number"
                 android:paddingStart="@dimen/dimen_20"
                 android:paddingEnd="@dimen/dimen_20"
                 android:singleLine="true"
@@ -70,7 +79,7 @@
             <!--android:hint="@string/identifying_code_hint"-->
 
             <TextView
-                android:id="@+id/tv_password"
+                android:id="@+id/tv_send_code"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -90,6 +99,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tl_username_and_password"
+        android:background="@drawable/bg_white_grey_selector"
         android:gravity="center"
         android:paddingTop="@dimen/dimen_12"
         android:paddingBottom="@dimen/dimen_12"
@@ -114,6 +124,7 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/iv_qq"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/dimen_90"
                 android:layout_weight="1"

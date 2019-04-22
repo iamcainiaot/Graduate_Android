@@ -30,14 +30,17 @@ public class RxHelper {
                         return Observable.create(new Observable.OnSubscribe<T>() {
                             @Override
                             public void call(Subscriber<? super T> subscriber) {
-                                if (result.getStatus() == BaseResponse.CODE_OK && result.getData() != null) {
-                                    try {
-                                        MyLogUtil.d("RxHelper", "返回数据：" + result.getData());
-                                        subscriber.onNext(result.getData());
-                                        subscriber.onCompleted();
-                                    } catch (Exception e) {
-                                        subscriber.onError(e);
+                                if (result.getStatus() == BaseResponse.CODE_OK) {
+                                    if (result.getData() != null) {
+                                        try {
+                                            MyLogUtil.d("RxHelper", "返回数据：" + result.getData());
+                                            subscriber.onNext(result.getData());
+                                        } catch (Exception e) {
+                                        }
+                                    } else {
+                                        // 也可不返回数据体，只需要证明请求成功了即可
                                     }
+                                    subscriber.onCompleted();
                                 } else {
                                     MyLogUtil.d("RxHelper", "出错了！");
                                 }

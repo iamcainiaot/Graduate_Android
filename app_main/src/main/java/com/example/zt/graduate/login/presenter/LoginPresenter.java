@@ -5,7 +5,7 @@ import android.content.Context;
 import com.example.zt.graduate.login.iview.ILoginView;
 import com.example.zt.graduate.login.model.request.LoginRequest;
 import com.example.zt.graduate.login.model.response.LoginResponse;
-import com.example.zt.graduate.manager.HttpManager;
+import com.example.zt.graduate.manager.UserInfoManager;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ import mvp.BasePresenter;
  * @description 登陆请求
  */
 public class LoginPresenter extends BasePresenter<ILoginView> {
-    private HttpManager mHttpManager = new HttpManager();
+    private UserInfoManager mUserInfoManager = new UserInfoManager();
     private Context mContext;
 
     public LoginPresenter(ILoginView view, Context context) {
@@ -31,12 +31,11 @@ public class LoginPresenter extends BasePresenter<ILoginView> {
      * 登陆请求
      *
      * @param userName 用户名（登陆用户名）
-     * @param pwd 密码
      */
-    public void doLogin(String userName, String pwd) {
-        LoginRequest loginRequest = new LoginRequest(userName, pwd);
+    public void doLogin(String userName) {
+        LoginRequest loginRequest = new LoginRequest(userName);
         mView.get().onLoginStart();
-        mHttpManager.doLogin(loginRequest,
+        mUserInfoManager.doLogin(loginRequest,
                 new RxSubscribe<List<LoginResponse>>(mContext, true) {
                     @Override
                     protected void _onNext(List<LoginResponse> loginResponse) {

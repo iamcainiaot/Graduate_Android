@@ -90,50 +90,12 @@ public abstract class BaseActivity extends AppCompatActivity implements IBaseVie
     }
 
     @Override
-    public void showProgress(boolean flag, String message) {
-        if (mProgressDialog == null) {
-            mProgressDialog = new ProgressDialog(this);
-            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-            mProgressDialog.setCancelable(flag);
-            mProgressDialog.setCanceledOnTouchOutside(false);
-            mProgressDialog.setMessage(message);
-        } else {
-            mProgressDialog.setMessage(message);
-        }
-        mProgressDialog.show();
-    }
-
-    @Override
-    public void showProgress(String message) {
-        showProgress(true, message);
-    }
-
-    @Override
     public void showProgress() {
-        showProgress(true);
-    }
-
-    @Override
-    public void showProgress(boolean flag) {
-        showProgress(flag, "正在处理，请稍后...");
     }
 
     @Override
     public void hideProgress() {
-        if (mProgressDialog == null) {
-            return;
-        }
-
-        if (mProgressDialog.isShowing()) {
-            mProgressDialog.dismiss();
-        }
     }
-
-    @Override
-    public void close() {
-        finish();
-    }
-
 
     public <T extends View> T $(@IdRes int id) {
         return findViewById(id);

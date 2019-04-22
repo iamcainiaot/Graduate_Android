@@ -11,8 +11,5 @@ public class NetUrl {
     /**
      * 客户资源统一路径
      */
-    // public static final String BASE_CLIENT_RES_URL = "http://10.5.222.133:8081/";
-    // static final String BASE_CLIENT_RES_URL = "http:10.5.220.234:8081/";
-    // static final String BASE_CLIENT_RES_URL = "http:10.5.220.209:8081/";
     static final String BASE_CLIENT_RES_URL = "http:192.168.31.170:8081/";
 }

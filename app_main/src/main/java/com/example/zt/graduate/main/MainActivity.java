@@ -4,23 +4,30 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
-import android.support.annotation.Nullable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 
-import com.example.administrator.graduate_android.R;
+import com.example.zt.graduate.R;
+import com.example.zt.graduate.app.UserApplication;
+import com.example.zt.graduate.choose_label.ChooseLabelActivity;
 import com.example.zt.graduate.main.adapter.MyPagerAdapter;
 import com.example.zt.graduate.main.fragment.HeartWallFragment;
 import com.example.zt.graduate.main.fragment.MySelfFragment;
 import com.example.zt.graduate.main.fragment.SearchingFragment;
 import com.roughike.bottombar.BottomBar;
-import com.roughike.bottombar.BottomBarBadge;
 import com.roughike.bottombar.OnMenuTabClickListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.callback.GetUserInfoCallback;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.api.BasicCallback;
+import lib_utils.MyLogUtil;
+import lib_utils.ToastUtil;
+import lib_utils.db.entity.UserInfoTable;
 import mvp.BaseMvpActivity;
 
 /**
@@ -40,66 +47,27 @@ public class MainActivity extends BaseMvpActivity {
         context.startActivity(intent);
     }
 
-    private BottomBarBadge unreadMessages;
+    public static MainActivity mainActivity;
     private BottomBar mBottomBar;
     private HeartWallFragment mHeartWallFragment;
     private SearchingFragment mSearchingFragment;
     private MySelfFragment mMySelfFragment;
     private ViewPager viewPager;
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        CoordinatorLayout mCoordinator = findViewById(R.id.mCoordinator);
-        viewPager = findViewById(R.id.viewPager);
-        initViewPager();
-
-        mBottomBar = BottomBar.attachShy(mCoordinator, viewPager, savedInstanceState);
-        mBottomBar.setItems(R.menu.bottombar_menu);
-        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
-            @Override
-            public void onMenuTabSelected(@IdRes int menuItemId) {
-                //单击事件 menuItemId 是 R.menu.bottombar_menu 中 item 的 id
-                switch (menuItemId) {
-                    case R.id.menu_heartwall:
-                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorPrimary));
-                        viewPager.setCurrentItem(0);
-                        break;
-                    case R.id.menu_searching:
-                        viewPager.setCurrentItem(1);
-                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorAccent));
-                        break;
-                    case R.id.menu_myself:
-                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.green));
-                        viewPager.setCurrentItem(2);
-                        break;
-                    default:
-                        break;
-                }
-            }
-
-            @Override
-            public void onMenuTabReSelected(@IdRes int menuItemId) {
-                //重选事件，当前已经选择了这个，又点了这个tab。微博点击首页刷新页面
-            }
-        });
-        setMsg();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        //保存BottomBar的状态
-        mBottomBar.onSaveInstanceState(outState);
-    }
-
+    /**
+     * GreenDao相关操作
+     */
+    private UserApplication mUserApplication;
+    private UserInfoTable mUserInfoTable;
 
     private void initViewPager() {
         List<Fragment> fragmentList = new ArrayList<>();
         fragmentList.add(null == mHeartWallFragment ? mHeartWallFragment = HeartWallFragment.getInstance() : mHeartWallFragment);
         fragmentList.add(null == mSearchingFragment ? mSearchingFragment = SearchingFragment.getInstance() : mSearchingFragment);
-        fragmentList.add(null == mMySelfFragment ? mMySelfFragment = MySelfFragment.getInstance() : mMySelfFragment);
-        // fragmentList.add(null == fourFragment ? fourFragment = FourFragment.newInstance() : fourFragment);
+        if (mMySelfFragment == null) {
+            mMySelfFragment = MySelfFragment.getInstance(mUserInfoTable);
+        }
+        fragmentList.add(mMySelfFragment);
         viewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager(), fragmentList));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -120,24 +88,6 @@ public class MainActivity extends BaseMvpActivity {
 
     }
 
-    private void setMsg() {
-        // 为tab设置一个标签，“信息”提示的数字
-        // 参数分别是：第几个tab；小圆圈的颜色；显示的数字
-        unreadMessages = mBottomBar.makeBadgeForTabAt(1, "#FF0000", 13);
-
-        // 设置显示或隐藏
-        unreadMessages.show();
-        //  unreadMessages.hide();
-        // 设置显示的数字
-        // unreadMessages.setCount(4);
-
-        // 设置显示/消失动画的延迟时间
-        unreadMessages.setAnimationDuration(200);
-
-        // 如果不点它，它一直显示
-        unreadMessages.setAutoShowAfterUnSelection(true);
-    }
-
     @Override
     public int layoutId() {
         return R.layout.bottombar_viewpager_layout;
@@ -145,11 +95,76 @@ public class MainActivity extends BaseMvpActivity {
 
     @Override
     public void initData() {
+        mUserApplication = (UserApplication) getApplication();
+        mUserInfoTable = mUserApplication.getUserInfoTable();
+    }
 
+    @Override
+    public void setStatus() {
+        setStatusMVP();
     }
 
     @Override
     public void initView() {
+        mainActivity = this;
+        CoordinatorLayout mCoordinator = findViewById(R.id.mCoordinator);
+        viewPager = findViewById(R.id.viewPager);
+        initViewPager();
 
+        mBottomBar = BottomBar.attachShy(mCoordinator, viewPager, savedInstanceState);
+        mBottomBar.setItems(R.menu.bottombar_menu);
+        mBottomBar.useOnlyStatusBarTopOffset();
+        mBottomBar.setOnMenuTabClickListener(new OnMenuTabClickListener() {
+            @Override
+            public void onMenuTabSelected(@IdRes int menuItemId) {
+                //单击事件 menuItemId 是 R.menu.bottombar_menu 中 item 的 id
+                switch (menuItemId) {
+                    case R.id.menu_heartwall:
+                        viewPager.setCurrentItem(0);
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorPrimary));
+                        break;
+                    case R.id.menu_searching:
+                        viewPager.setCurrentItem(1);
+                        // 让底部栏显示
+                        mBottomBar.hide();
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.colorAccent));
+                        break;
+                    case R.id.menu_myself:
+                        mBottomBar.setActiveTabColor(getResources().getColor(R.color.green));
+                        viewPager.setCurrentItem(2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            @Override
+            public void onMenuTabReSelected(@IdRes int menuItemId) {
+                //重选事件，当前已经选择了这个，又点了这个tab。微博点击首页刷新页面
+            }
+        });
+        viewPager.setOffscreenPageLimit(3);
+
+        JiGuangLogin();
+    }
+
+    // 极光登陆
+    private void JiGuangLogin() {
+        if (mUserInfoTable != null) {
+            // 注册成功，开始登陆
+            String password = mUserInfoTable.getUserId().substring(24);
+            JMessageClient.login(mUserInfoTable.getName(), password,
+                    new BasicCallback() {
+                        @Override
+                        public void gotResult(int i, String s) {
+                            JMessageClient.getUserInfo(mUserInfoTable.getName(), new GetUserInfoCallback() {
+                                @Override
+                                public void gotResult(int i, String s, UserInfo userInfo) {
+                                    MyLogUtil.d("极光IM 登陆成功", "userInfo:" + userInfo.toString());
+                                }
+                            });
+                        }
+                    });
+        }
     }
 }

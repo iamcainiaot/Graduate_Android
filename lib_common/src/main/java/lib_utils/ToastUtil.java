@@ -3,6 +3,8 @@ package lib_utils;
 import android.content.Context;
 import android.widget.Toast;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * Toast统一管理类
  *
@@ -19,61 +21,32 @@ public class ToastUtil {
      * @param context
      * @param message
      */
-    public static void showShort(Context context, CharSequence message) {
+    public static void showShort(Context context, CharSequence message, boolean flag) {
         try {
-            if (null == toast) {
-                //  toast = Toasty.normal(context, message);
-                toast = Toast.makeText(context, message, Toast.LENGTH_SHORT);
-            } else {
-                toast.setText(message);
-            }
+            toast = flag ? Toasty.success(context, message, Toast.LENGTH_SHORT)
+                    : Toasty.error(context, message, Toast.LENGTH_SHORT);
             toast.show();
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
-
     /**
-     * 长时间显示Toast
+     * 短时间显示Toast
      *
      * @param context
      * @param message
      */
-    public static void showLong(Context context, CharSequence message) {
-        try {
-            if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_LONG);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
-            } else {
-                toast.setText(message);
-            }
-            toast.show();
-        } catch (Exception ex) {
-            MyLogUtil.e(TAG, ex);
-        }
-    }
-
-    /**
-     * 自定义显示Toast时间
-     *
-     * @param context
-     * @param message
-     * @param duration
-     */
-    public static void show(Context context, CharSequence message, int duration) {
-        try {
-            if (null == toast) {
-                toast = Toast.makeText(context.getApplicationContext(), message, duration);
-                // toast.setGravity(Gravity.CENTER, 0, 0);
-            } else {
-                toast.setText(message);
-            }
-            toast.show();
-        } catch (Exception ex) {
-            MyLogUtil.e(TAG, ex);
-        }
-    }
+    // public static void showError(Context context, CharSequence message) {
+//      try {
+//          toast = flag ? Toasty.success(context, message, Toast.LENGTH_SHORT)
+//                  : Toasty.error(context, message, Toast.LENGTH_SHORT);
+//          toast.setText(message);
+//          toast.show();
+//      } catch (Exception ex) {
+//          ex.printStackTrace();
+//      }
+//  }
 
     /**
      * Hide the toast, if any.

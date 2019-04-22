@@ -13,6 +13,7 @@
         <attr name="borderWidth" />
         <attr name="borderColor" />
         <attr name="type" />
+        <attr name="width" />
     </declare-styleable>
 
     <declare-styleable name="ArcProgressBar">

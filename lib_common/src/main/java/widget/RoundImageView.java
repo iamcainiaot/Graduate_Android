@@ -111,7 +111,7 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         type = typedArray.getInt(R.styleable.MyImageView_type, TYPE_CIRCLE);
         mBorderColor = typedArray.getColor(R.styleable.MyImageView_borderColor, Color.WHITE);
         mBorderWidth = typedArray.getDimensionPixelSize(R.styleable.MyImageView_borderWidth, 0);
-
+        mWidth = typedArray.getDimensionPixelSize(R.styleable.MyImageView_width, 30);
         typedArray.recycle();
     }
 
@@ -125,7 +125,7 @@ public class RoundImageView extends android.support.v7.widget.AppCompatImageView
         hMode = MeasureSpec.getMode(heightMeasureSpec);
         // 类型为圆形时，我们强制让view的宽和高一致
         if (type == TYPE_CIRCLE) {
-            mWidth = Math.min(getMeasuredWidth(), getMeasuredHeight());
+            // mWidth = Math.min(getMeasuredWidth(), getMeasuredHeight());
             mRadius = mWidth / 2;
             setMeasuredDimension(mWidth, mWidth);
         }

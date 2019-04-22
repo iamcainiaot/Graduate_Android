@@ -45,15 +45,15 @@ public abstract class RxSubscribe<T> extends rx.Subscriber<T> {
     @Override
     public void onError(Throwable e) {
         if (!CommonUtils.isNetWorkConnected(mContext)) {
-            ToastUtil.showLong(mContext, "网络不可用...");
+            ToastUtil.showShort(mContext, "网络不可用...", false);
             _onError("网络不可用");
             //SocketTimeoutException:服务器响应超时
             //ConnectException:服务器请求超时
         } else if (e instanceof SocketTimeoutException || e instanceof ConnectException) {
-            ToastUtil.showLong(mContext, "请求超时,请稍后再试...");
+            ToastUtil.showShort(mContext, "请求超时,请稍后再试...", false);
             _onError("请求超时,请稍后再试...");
         } else if (e instanceof HttpException) {
-            ToastUtil.showLong(mContext, "服务器异常，请稍后再试...");
+            ToastUtil.showShort(mContext, "服务器异常，请稍后再试...", false);
             _onError("服务器异常，请稍后再试...");
         } else {
             _onError(e.getMessage());

@@ -13,7 +13,15 @@
     <string name="heart_wall">心声墙</string>
     <string name="myself">本人</string>
     <string name="choose_your_label">选择你的个性标签</string>
-    <string name="choose_your_label_english">choose your label !</string>
+    <string name="choose_your_label_english">初始化你的个人信息！</string>
     <string name="click_next">进入主页    ---></string>
     <string name="now_update_label">正在提交标签</string>
+    <string name="heart_wall_get_acquainted">认识一下</string>
+    <string name="bottom_now">已经到底啦~</string>
+    <string name="hint_heart_wall">写下你的心声</string>
+    <string name="chatted_list">聊过天的人</string>
+    <string name="chatted_after">（聊天列表）</string>
+    <string name="notify">通知</string>
+    <string name="notify_after">（包含点赞、聊天信息）</string>
+    <string name="user_help">客服帮助</string>
 </resources>

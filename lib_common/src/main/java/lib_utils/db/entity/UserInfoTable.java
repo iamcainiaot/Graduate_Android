@@ -1,5 +1,8 @@
 package lib_utils.db.entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Property;
@@ -13,7 +16,7 @@ import java.util.Objects;
  * @description 描述
  */
 @Entity
-public class UserInfoTable {
+public class UserInfoTable implements Parcelable {
     /**
      * userId
      */
@@ -53,6 +56,40 @@ public class UserInfoTable {
     @Generated(hash = 1354492153)
     public UserInfoTable() {
     }
+
+    protected UserInfoTable(Parcel in) {
+        userId = in.readString();
+        name = in.readString();
+        sex = in.readString();
+        label = in.readString();
+        imageUrl = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(userId);
+        dest.writeString(name);
+        dest.writeString(sex);
+        dest.writeString(label);
+        dest.writeString(imageUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<UserInfoTable> CREATOR = new Creator<UserInfoTable>() {
+        @Override
+        public UserInfoTable createFromParcel(Parcel in) {
+            return new UserInfoTable(in);
+        }
+
+        @Override
+        public UserInfoTable[] newArray(int size) {
+            return new UserInfoTable[size];
+        }
+    };
 
     public String getUserId() {
         return userId;

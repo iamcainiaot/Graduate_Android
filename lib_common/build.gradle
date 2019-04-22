@@ -5,7 +5,7 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -83,4 +83,18 @@ dependencies {
     compile 'org.jsoup:jsoup:1.9.2'
     // 进度框
     compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    // 九宫格图片
+    compile 'com.github.HotBitmapGG:NineImageView:V1.0'
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:3.8.0'
+    // Toast
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
+    // CardView
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    // 智能刷新
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    // EventBus 事件通知
+    compile 'org.greenrobot:eventbus:3.1.1'
+    // 点赞动画
+    compile 'me.yifeiyuan.periscopelayout:library:1.0.0'
 }

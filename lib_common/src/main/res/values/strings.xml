@@ -13,4 +13,6 @@
     <string name="loading_failed">加载失败，请重试！</string>
     <string name="qq_login">QQ</string>
     <string name="phone_number_login">手机号</string>
+    <string name="click_add_picture">点击添加图片</string>
+    <string name="with_sb_chat">和%s聊天中..</string>
 </resources>

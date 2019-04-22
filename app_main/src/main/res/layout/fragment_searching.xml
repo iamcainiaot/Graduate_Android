@@ -15,14 +15,54 @@
         style="@style/HorizontalNormalDividerLineStyle" />
 
     <RelativeLayout
+        android:id="@+id/rl_searching"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/dan_dan_purple">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@string/searching" />
+        <widget.WaveView
+            android:id="@+id/wv_wave_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
+        <RelativeLayout
+            android:id="@+id/rl_click_me"
+            android:layout_width="@dimen/dimen_300"
+            android:layout_height="@dimen/dimen_300"
+            android:layout_centerInParent="true">
+
+            <widget.RoundImageView
+                android:id="@+id/iv_click_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_searching_main_page"
+                app:width="@dimen/dimen_200" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="点我!"
+                android:textSize="@dimen/font_24" />
+        </RelativeLayout>
+
+        <widget.FillScreenButton
+            android:id="@+id/button_test"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="100dp"
+            android:background="@color/transparent"
+            android:textColor="#fff" />
+
+        <widget.FillScreenButton
+            android:id="@+id/bt_test"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:background="@color/transparent" />
     </RelativeLayout>
 </LinearLayout>

@@ -1,30 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@drawable/bg_wall">
 
-    <widget.header_widget.CenterTextHeader
+    <LinearLayout
+        android:id="@+id/ll_content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:centerTitle="心声墙" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <View
-        android:id="@+id/view_line"
-        style="@style/HorizontalNormalDividerLineStyle" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/dsad"
-            android:layout_width="wrap_content"
+        <widget.header_widget.LeftTextRightTextHeader
+            android:id="@+id/header"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:gravity="center"
-            android:text="@string/heart_wall" />
-    </RelativeLayout>
-</LinearLayout>
+            android:layout_marginStart="@dimen/dimen_20"
+            android:layout_marginTop="@dimen/dimen_40"
+            android:layout_marginEnd="@dimen/dimen_20"
+            app:leftText="心声墙"
+            app:rightText="发心声" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_1"
+            android:background="@color/common_purple" />
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlAccentColor="@color/dan_dan_purple"
+            app:srlHeaderHeight="@dimen/dimen_100"
+            app:srlPrimaryColor="@color/black">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_heart_wall"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/transparent"
+                android:padding="@dimen/dimen_12"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_heart_wall" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/view_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="好像出了点问题，点我重试"
+        android:textColor="@color/common_purple"
+        android:textSize="@dimen/font_36" />
+
+</FrameLayout>
+

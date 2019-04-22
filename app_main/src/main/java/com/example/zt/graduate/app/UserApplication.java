@@ -5,13 +5,18 @@ import android.support.multidex.MultiDexApplication;
 
 import com.example.zt.graduate.db.greendaogen.DaoSession;
 import com.example.zt.graduate.db.greendaogen.UserInfoTableDao;
+import com.example.zt.graduate.main.chat.ChatMainActivity;
+import com.example.zt.graduate.main.chat.chat_message.ChatModel;
 import com.mob.MobSDK;
 
 import java.lang.reflect.Method;
 import java.util.List;
 
+import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.event.NotificationClickEvent;
 import lib_utils.CommonUtils;
 import lib_utils.MyLogUtil;
+import lib_utils.ToastUtil;
 import lib_utils.db.entity.UserInfoTable;
 import lib_utils.db.manager.DbManager;
 import lib_utils.disk_cache.DiskCacheManager;
@@ -38,9 +43,24 @@ public class UserApplication extends MultiDexApplication {
         initDiskCacheManager();
         showDebugDBAddress();
         initTable();
-
         // 短信验证码服务
         MobSDK.init(this);
+        // 极光推送
+        JiGuang();
+
+
+    }
+
+    private void JiGuang() {
+        // 极光推送
+        JMessageClient.setDebugMode(true);
+        JMessageClient.init(this);
+
+    }
+
+    // TODO 点击通知栏出现的消息通知做的事儿
+    public void onEvent(NotificationClickEvent event) {
+        ChatMainActivity.start(this);
     }
 
     /**
@@ -55,16 +75,12 @@ public class UserApplication extends MultiDexApplication {
     /**
      * 数据库操作对象
      */
-    private DaoSession daoSession;
+    private static DaoSession daoSession;
 
     /**
      * 获取数据库对象
      */
     public DaoSession getDaoSession() {
-        MyLogUtil.d("  复制以下代码即可调用数据库" +
-                "      UserApplication userApplication = (UserApplication) getApplication();" +
-                "        mDaoSession = userApplication.getDaoSession();" +
-                "mDaoSession.xxx");
         return daoSession;
     }
 
@@ -119,6 +135,23 @@ public class UserApplication extends MultiDexApplication {
         List<UserInfoTable> list = userInfoTableDao.queryBuilder().list();
         if (!CommonUtils.isEmpty(list)) {
             return list.get(0);
+        }
+        return null;
+    }
+
+    private static UserInfoTable mUserInfoTable;
+
+    /**
+     * 得到现在的用户Id
+     *
+     * @return 用户id
+     */
+    public static String getCurrentId() {
+        UserInfoTableDao userInfoTableDao = daoSession.getUserInfoTableDao();
+        List<UserInfoTable> list = userInfoTableDao.queryBuilder().list();
+        if (!CommonUtils.isEmpty(list)) {
+            mUserInfoTable = list.get(0);
+            return mUserInfoTable.getUserId();
         }
         return null;
     }
